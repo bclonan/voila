@@ -48,6 +48,10 @@ function _getJSON(formElements) {
     return formSchema
 }
 
+function execTypeform () {
+    (function(){var qs,js,q,s,d=document,gi=d.getElementById,ce=d.createElement,gt=d.getElementsByTagName,id="typeform" + Math.random().toString(36).substring(7),b="https://s3-eu-west-1.amazonaws.com/share.typeform.com/";if(!gi.call(d,id)){js=ce.call(d,"script");js.id=id;js.src=b+"widget.js";q=gt.call(d,"script")[0];q.parentNode.insertBefore(js,q)}})()
+}
+
 // <form data-typeform='askAwesomely'>
 // </form>
 
@@ -55,13 +59,18 @@ function _getJSON(formElements) {
     const tfMorphs = document.querySelectorAll('[data-typeform]')
 
     for (const tfMorph of tfMorphs) {
+        tfMorph.style.visibility = 'hidden'
         const json = _getJSON(tfMorph.elements)
-
         fetch('http://172.20.12.32:8000/converter', {
             method: 'post',
             body: JSON.stringify(json)
-        }).then(function (response) {
-            tfMorph.innerHTML = response
         })
+            .then(function (response) {
+                response.text().then(function (text) {
+                    tfMorph.style.visibility = 'visible'
+                    tfMorph.innerHTML = text
+                    execTypeform()
+                })
+            })
     }
 })()
