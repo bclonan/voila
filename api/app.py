@@ -12,3 +12,6 @@ api = application = falcon.API(middleware=[CorsMiddleware()])
 
 converter = converter.Converter()
 api.add_route('/converter', converter)
+
+register = register.Register()
+api.add_route('/register', register)
