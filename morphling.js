@@ -6,7 +6,12 @@ var fields = []
 var types = {
     'INPUT': {
         'text': 'short_text',
-        'email': 'email'
+        'email': 'email',
+        'date': 'date',
+        'url': 'website',
+        'tel': 'short_text',
+        'number': 'number',
+        'range': 'opinion_scale'
     },
     'SELECT': {
         'select-one': 'multiple_choice'
@@ -27,6 +32,12 @@ function _getJSON(formElements) {
                 validations: {
                     required: false
                 }
+            }
+            var max = parseInt(item.max)
+            var min = parseInt(item.min)
+            if (item.type === 'range') {
+                element.properties.steps = (max <= 11) ? max : 11
+                element.properties.start_at_one = min === 1
             }
             if (item.tagName === 'SELECT') {
                 var choices = []
