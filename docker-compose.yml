@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  python:
+    build: ./api/server
+
+  redis:
+      build: ./api/redis
+      ports:
+          - "6379"
