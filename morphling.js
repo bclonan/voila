@@ -5,7 +5,8 @@ var formSchema = {
 var fields = []
 var types = {
     'INPUT': {
-        'text': 'short_text'
+        'text': 'short_text',
+        'email': 'email'
     },
     'SELECT': {
         'select-one': 'multiple_choice'
@@ -36,10 +37,15 @@ function _getJSON(formElements) {
                     }
                 }
                 element.properties.choices = choices
-                element.properties.allow_multiple_selection = false
-                element.properties.randomize = false
-                element.properties.vertical_alignment = false
-                element.properties.allow_other_choice = false
+                if (choices.length > 8) {
+                    element.type = 'dropdown'
+                    element.properties.alphabetical_order = false
+                } else {
+                    element.properties.allow_multiple_selection = false
+                    element.properties.randomize = false
+                    element.properties.vertical_alignment = false
+                    element.properties.allow_other_choice = false
+                }
             }
             fields.push(element)
         }
@@ -65,12 +71,12 @@ function execTypeform () {
             method: 'post',
             body: JSON.stringify(json)
         })
-            .then(function (response) {
-                response.text().then(function (text) {
-                    tfMorph.style.visibility = 'visible'
-                    tfMorph.innerHTML = text
-                    execTypeform()
-                })
+        .then(function (response) {
+            response.text().then(function (text) {
+                tfMorph.style.visibility = 'visible'
+                tfMorph.innerHTML = text
+                execTypeform()
             })
+        })
     }
 })()
