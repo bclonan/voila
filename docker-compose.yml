@@ -2,11 +2,13 @@ version: '2'
 
 services:
   python:
-    build: ./api/server
-    ports:
+      build: ./api/server
+      expose:
           - "8000"
+      ports:
+          - "8000:8000"
 
   redis:
       build: ./api/redis
-      ports:
+      expose:
           - "6379"
