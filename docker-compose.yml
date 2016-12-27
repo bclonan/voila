@@ -3,8 +3,6 @@ version: '2'
 services:
   python:
       build: ./api/server
-      expose:
-          - "8000"
       ports:
           - "8000:8000"
 
