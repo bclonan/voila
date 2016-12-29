@@ -78,7 +78,7 @@ function execTypeform () {
     for (const tfMorph of tfMorphs) {
         tfMorph.style.visibility = 'hidden'
         const json = _getJSON(tfMorph.elements)
-        fetch('http://172.20.12.32:8000/converter', {
+        fetch('http://localhost:8000/converter', {
             method: 'post',
             body: JSON.stringify(json)
         })
