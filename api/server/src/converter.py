@@ -30,9 +30,9 @@ class Converter():
 
     def doesAlreadyExist(self, json):
         hash = hashlib.sha1()
-        formHash = hash.update(json)
-
-
+        hash.update(json)
+        formHash = hash.hexdigest()
+        
     def on_post(self, req, resp):
         if req.content_length:
             content = json.load(req.stream)

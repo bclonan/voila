@@ -15,12 +15,13 @@ class Register():
 
     def on_post(self, req, resp):
         if req.content_length:
-            content = json.load(req.stream)
+            apiKey = json.load(req.stream)
 
             hash = hashlib.sha1()
-            publicKey = hash.update(content)
+            hash.update(apiKey)
+            publicKey = hash.hexdigest()
 
-            self.apiKeysRepository.setOriginalApiKey(content, publicKey)
+            self.apiKeysRepository.setOriginalApiKey(publicKey, apiKey)
 
             resp.status = falcon.HTTP_200
             resp.content_type = 'application/json'
