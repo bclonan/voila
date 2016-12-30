@@ -1,7 +1,7 @@
 <html>
 <body>
 <h1>Contact form</h1>
-<form data-typeform='bde46fd2ab011ca83de2a023314b88451a53967d' name="contact" action="" method="POST" style="width:600px;height:500px;">
+<!-- <form data-typeform='bde46fd2ab011ca83de2a023314b88451a53967d' name="contact" action="" method="POST" style="width:600px;height:500px;">
     <label for="title">Subject</label>
     <input type="text" id="title" name="title">
     <br/>
@@ -42,6 +42,36 @@
     <input id="email" type="email" name="email" required>
     <br/>
     <input type="button" name="submit" value="submit"/>
+</form> -->
+<form id="formulario" data-typeform='bde46fd2ab011ca83de2a023314b88451a53967d' name="formulario" method="post" enctype="multipart/form-data" action="contactoC.pl">
+<label for="nombre">Nombre *</label>
+<input name="nombre" id="nombre" type="text" value="">
+<label for="nombre">Apellidos *</label>
+<input name="apellidos" id="apellidos" type="text" value="">
+<label for="correo">Correo electrónico *</label>
+<input name="correo" id="correo" type="text" value="">
+<label for="telefono">Teléfono *</label>
+<input name="telefono" id="telefono" type="text" value="">
+<label for="tipo_consulta">Selecciona el tipo de  solicitud *:</label>
+<select name="tipo_consulta" id="tipo_consulta" value="">
+<option value="" selected="">Seleccione una opción</option>
+<option value="Modificaciones/Consultas suscripción">Modificaciones/Consultas suscripción</option>
+<option value="Cancelación datos de registro">Cancelación datos de registro</option>
+<option value="Solicitar código de acceso a Kiosko y Más">Solicitar código de acceso a Kiosko y Más</option>
+<option value="Envío de Newsletter">Envío de Newsletter</option>
+<option value="Incidencia técnica/contenidos">Incidencia técnica/contenidos</option>
+<option value="Redacción">Redacción</option>
+<option value="Publicidad">Publicidad</option>
+<option value="El País Edición Impresa">El País Edición Impresa</option>
+<option value="El País Más">El País Más</option>
+<option value="Otros">Otros</option>
+</select>
+<label for="pregunta">Consulta *</label>
+<textarea name="pregunta" id="pregunta" cols="40" rows="5" maxlength="500"></textarea>
+<input style="display:none" type="hidden" id="submit" name="submit" value="1">
+<a id="enviar" class="boton" href="javascript:void(0);" onclick="javascript:EPET_showCaptcha();f_cambiar_style(this, 'none');">Enviar</a>
+<div id="captcha" class="captcha" style="display: none;"> </div>
+
 </form>
 <script type="text/javascript" src="morphling.js"></script>
 </body>

@@ -24,7 +24,7 @@ var types = {
 function _getJSON(formElements) {
     for (var key in formElements) {
         var item = formElements[key]
-        if (!isNaN(key) && item.type !== 'button' && item.tagName !== undefined) {
+        if (!isNaN(key) && item.type !== 'button' && item.labels && item.labels.length > 0 && item.tagName !== undefined) {
             var element = {
                 title: item.labels[0].textContent,
                 type: types[item.tagName][item.type],
