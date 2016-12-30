@@ -3,11 +3,15 @@ import requests
 import json
 import config
 
+from apiKeysRepository import ApiKeysRepository
+
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 class Converter():
     url = '/'
+
+    apiKeysRepository = ApiKeysRepository()
 
     def prepareEmbed(self, formUid, formName):
         embedUrl = 'https://morphling1.typeform.com/to/' + formUid
@@ -28,7 +32,13 @@ class Converter():
         if req.content_length:
             content = json.load(req.stream)
 
-            headers = {'X-Typeform-Key': config.TYPEFORM_API_KEY}
+            publicKey = req.headers['X-Typeform-Key']
+            originalApiKey = apiKeysRepository.getOriginalApiKey(publicKey)
+
+            if originalApiKey:
+                headers = {'X-Typeform-Key': originalApiKey}
+            else:
+                headers = {'X-Typeform-Key': config.TYPEFORM_API_KEY}
 
             r = requests.post(config.TYPEFORM_API_CREATE_URL, headers = headers, data = json.dumps(content), verify=config.VERIFY_CREDENTIALS)
             #Link to typeform form

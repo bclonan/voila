@@ -3,6 +3,8 @@ version: '2'
 services:
   python:
       build: ./api/server
+      links:
+          - redis
       ports:
           - "8000:8000"
 
