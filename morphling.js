@@ -78,7 +78,12 @@ function execTypeform () {
     for (const tfMorph of tfMorphs) {
         tfMorph.style.visibility = 'hidden'
         const json = _getJSON(tfMorph.elements)
+        var customHeaders = new Headers({
+            'X-Typeform-Key': tfMorph.getAttribute('data-typeform'),
+            'Content-Type' : 'text/plain'
+        })
         fetch('http://localhost:8000/converter', {
+            headers: customHeaders,
             method: 'post',
             body: JSON.stringify(json)
         })

@@ -2,6 +2,7 @@ import falcon
 import requests
 import json
 import config
+import hashlib
 
 from apiKeysRepository import ApiKeysRepository
 
@@ -28,6 +29,11 @@ class Converter():
 
         return embedCode
 
+    def doesAlreadyExist(self, json):
+        hash = hashlib.sha1()
+        formHash = hash.update(json)
+        
+
     def on_post(self, req, resp):
         if req.content_length:
             content = json.load(req.stream)
@@ -48,6 +54,7 @@ class Converter():
             # typeform_duplicate_url = config.TYPEFORM_DUPLICATE_BASE_URL + str(r.json()['id']) + '?force_demo=true#landingPreview'
 
             dataFromApi = r.json()
+
             if 'id' in dataFromApi:
                 id = str(dataFromApi['id'])
 
