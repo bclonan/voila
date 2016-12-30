@@ -10,9 +10,8 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 class Converter():
-    url = '/'
-
-    apiKeysRepository = ApiKeysRepository()
+    def __init__(self):
+        self.apiKeysRepository = ApiKeysRepository()
 
     def prepareEmbed(self, formUid, formName):
         embedUrl = 'https://morphling1.typeform.com/to/' + formUid
@@ -32,17 +31,17 @@ class Converter():
     def doesAlreadyExist(self, json):
         hash = hashlib.sha1()
         formHash = hash.update(json)
-        
+
 
     def on_post(self, req, resp):
         if req.content_length:
             content = json.load(req.stream)
 
-            publicKey = req.headers['X-Typeform-Key']
-            originalApiKey = apiKeysRepository.getOriginalApiKey(publicKey)
-
-            if originalApiKey:
-                headers = {'X-Typeform-Key': originalApiKey}
+            publicKey = req.headers['X-TYPEFORM-KEY']
+            if publicKey:
+                originalApiKey = self.apiKeysRepository.getOriginalApiKey(publicKey)
+                if originalApiKey:
+                    headers = {'X-Typeform-Key': originalApiKey}
             else:
                 headers = {'X-Typeform-Key': config.TYPEFORM_API_KEY}
 
