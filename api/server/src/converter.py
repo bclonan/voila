@@ -5,6 +5,7 @@ import config
 import hashlib
 
 from apiKeysRepository import ApiKeysRepository
+from formHashRepository import FormHashRepository
 
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
@@ -12,6 +13,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 class Converter():
     def __init__(self):
         self.apiKeysRepository = ApiKeysRepository()
+        self.formHashRepository = FormHashRepository()
 
     def prepareEmbed(self, formUid, formName):
         embedUrl = 'https://morphling1.typeform.com/to/' + formUid
@@ -28,16 +30,25 @@ class Converter():
 
         return embedCode
 
-    def doesAlreadyExist(self, json):
+    def getFormUidIfExist(self, json):
         hash = hashlib.sha1()
         hash.update(json)
         formHash = hash.hexdigest()
+        formUid = self.formHashRepository.getFormByHash(formHash)
+        return formUid if formUid else None
+
+    def saveFormHash(self, json, uid):
+        hash = hashlib.sha1()
+        hash.update(json)
+        formHash = hash.hexdigest()
+        formUid = self.formHashRepository.setHashForForm(formHash, uid)
+        return
         
     def on_post(self, req, resp):
         if req.content_length:
             content = json.load(req.stream)
-
             publicKey = req.headers['X-TYPEFORM-KEY']
+
             if publicKey is None:
                 headers = {'X-Typeform-Key': config.TYPEFORM_API_KEY}
             else:
@@ -48,27 +59,35 @@ class Converter():
                 else:
                     headers = {'X-Typeform-Key': config.TYPEFORM_API_KEY}
 
-            r = requests.post(config.TYPEFORM_API_CREATE_URL, headers = headers, data = json.dumps(content), verify=config.VERIFY_CREDENTIALS)
-            #Link to typeform form
-            # typeform_url = config.TYPEFORM_RENDER_BASE_URL + str(r.json()['id'])
-
-            #Duplication link to land in the builder
-            # typeform_duplicate_url = config.TYPEFORM_DUPLICATE_BASE_URL + str(r.json()['id']) + '?force_demo=true#landingPreview'
-
-            dataFromApi = r.json()
-
-            if 'id' in dataFromApi:
-                id = str(dataFromApi['id'])
-
-                embed = self.prepareEmbed(id, 'Form name should be here')
-
+            formUid = self.getFormUidIfExist(json.dumps(content))
+            if formUid:
+                embed = self.prepareEmbed(formUid, 'Temp name')
                 resp.status = falcon.HTTP_200
                 resp.content_type = 'application/json'
                 resp.body = embed
+                return
             else:
-                resp.status = falcon.HTTP_500
-                resp.content_type = 'application/json'
-                resp.body = json.dumps(dataFromApi)
+                r = requests.post(config.TYPEFORM_API_CREATE_URL, headers = headers, data = json.dumps(content), verify=config.VERIFY_CREDENTIALS)
+                #Link to typeform form
+                # typeform_url = config.TYPEFORM_RENDER_BASE_URL + str(r.json()['id'])
+
+                #Duplication link to land in the builder
+                # typeform_duplicate_url = config.TYPEFORM_DUPLICATE_BASE_URL + str(r.json()['id']) + '?force_demo=true#landingPreview'
+
+                dataFromApi = r.json()
+
+                if 'id' in dataFromApi:
+                    id = str(dataFromApi['id'])
+
+                    embed = self.prepareEmbed(id, 'Form name should be here')
+                    self.saveFormHash(json.dumps(content), id)
+                    resp.status = falcon.HTTP_200
+                    resp.content_type = 'application/json'
+                    resp.body = embed
+                else:
+                    resp.status = falcon.HTTP_500
+                    resp.content_type = 'application/json'
+                    resp.body = json.dumps(dataFromApi)
         else:
             resp.status = falcon.HTTP_500
             resp.content_type = 'application/json'
