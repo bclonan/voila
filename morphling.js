@@ -82,7 +82,7 @@ function execTypeform () {
             'X-Typeform-Key': tfMorph.getAttribute('data-typeform'),
             'Content-Type' : 'text/plain'
         })
-        fetch('http://localhost:8000/converter', {
+        fetch('http://localhost:7000/converter', {
             headers: customHeaders,
             method: 'post',
             body: JSON.stringify(json)

@@ -2,7 +2,7 @@
 function registerApiKey() {
     const apiKey = document.forms["register-tf-api-key"]["tf-api-key"].value
 
-    fetch('http://localhost:8000/register', {
+    fetch('http://localhost:7000/register', {
         method: 'post',
         body: JSON.stringify(apiKey)
     })

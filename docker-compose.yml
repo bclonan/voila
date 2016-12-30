@@ -3,12 +3,14 @@ version: '2'
 services:
   python:
       build: ./api/server
+      container_name: morphling_api
       links:
           - redis
       ports:
-          - "8000:8000"
+          - "7000:8000"
 
   redis:
       build: ./api/redis
+      container_name: morphling_redis
       expose:
           - "6379"
