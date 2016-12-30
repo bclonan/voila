@@ -1,5 +1,7 @@
 FROM    python:2-onbuild
 
+RUN     easy_install hashlib
+
 # Expose port
 EXPOSE  8000
 
