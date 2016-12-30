@@ -38,12 +38,15 @@ class Converter():
             content = json.load(req.stream)
 
             publicKey = req.headers['X-TYPEFORM-KEY']
-            if publicKey:
+            if publicKey is None:
+                headers = {'X-Typeform-Key': config.TYPEFORM_API_KEY}
+            else:
                 originalApiKey = self.apiKeysRepository.getOriginalApiKey(publicKey)
+
                 if originalApiKey:
                     headers = {'X-Typeform-Key': originalApiKey}
-            else:
-                headers = {'X-Typeform-Key': config.TYPEFORM_API_KEY}
+                else:
+                    headers = {'X-Typeform-Key': config.TYPEFORM_API_KEY}
 
             r = requests.post(config.TYPEFORM_API_CREATE_URL, headers = headers, data = json.dumps(content), verify=config.VERIFY_CREDENTIALS)
             #Link to typeform form
