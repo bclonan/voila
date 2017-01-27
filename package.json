@@ -1,0 +1,27 @@
+{
+  "name": "voila",
+  "version": "0.1.0",
+  "description": "Convert HTML to Typeform on the fly.",
+  "main": "app.js",
+  "dependencies": {
+    "webpack": "^1.14.0"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^1.16.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js",
+    "start": "./node_modules/.bin/webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Typeform/Morphling.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Typeform/Morphling/issues"
+  },
+  "homepage": "https://github.com/Typeform/Morphling#readme"
+}
