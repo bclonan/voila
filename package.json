@@ -28,9 +28,14 @@
     "url": "https://github.com/Typeform/Morphling/issues"
   },
   "homepage": "https://github.com/Typeform/Morphling#readme",
+  "babel": {
+    "presets": ["es2015"]
+  },
   "ava": {
     "files": [
       "src/*.test.js"
-    ]
+    ],
+    "require": ["babel-register"],
+    "babel": "inherit"
   }
 }
