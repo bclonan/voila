@@ -7,10 +7,11 @@
     "webpack": "^1.14.0"
   },
   "devDependencies": {
+    "ava": "^0.17.0",
     "webpack-dev-server": "^1.16.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "ava",
     "build": "webpack --config webpack.config.js",
     "start": "./node_modules/.bin/webpack-dev-server"
   },
@@ -23,5 +24,10 @@
   "bugs": {
     "url": "https://github.com/Typeform/Morphling/issues"
   },
-  "homepage": "https://github.com/Typeform/Morphling#readme"
+  "homepage": "https://github.com/Typeform/Morphling#readme",
+  "ava": {
+    "files": [
+      "src/*.test.js"
+    ]
+  }
 }

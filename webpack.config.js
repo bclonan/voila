@@ -1,7 +1,7 @@
 var path = require('path');
 
 module.exports = {
-  entry: './app.js',
+  entry: './src/app.js',
   output: {
     filename: 'voila.js',
     publicPath: '/assets/',
