@@ -117,3 +117,32 @@ test.skip('walk through the tree [test has not been finished]', t => {
 
   tree.walkThroughLevels(branch => {}, level => {})
 })
+
+test('find patterns', t => {
+  const html = getHtml('<form>' +
+    '<div>' +
+      '<span>field 1</span>' +
+      '<p>Bla</p>' +
+      '<input type="text" id="field1" />' +
+    '</div>' +
+    '<div>' +
+      '<span>field 2</span>' +
+      '<input type="text" id="field2" />' +
+    '</div>' +
+    '<div>' +
+      '<span>field 3</span>' +
+      '<input type="text" id="field3" />' +
+    '</div>' +
+  '</form>')
+
+  const tree = new Tree()
+  tree.fill(html)
+
+  tree.calculateHashes()
+
+  const patterns = tree.getPatterns()
+  t.is(patterns.length, 2)
+
+  const firstPattern = patterns[0]
+  t.is(firstPattern.tagName, 'DIV')
+})

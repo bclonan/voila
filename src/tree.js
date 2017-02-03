@@ -44,7 +44,43 @@ class Tree {
   getPatterns () {
     const patterns = []
 
-    return patterns
+    const getMostRepeatedHash = (level) => {
+      const passedHashes = []
+
+      level.forEach(element => {
+        if (element.children.length > 0
+          // check if branch contains FIELD
+          && element.contains(x => x.tagName === 'INPUT'))
+          {
+            const hash = element.hash
+
+            if (passedHashes.findIndex(x => x.hash === hash) < 0) {
+              const duplicated = level.filter(x => x.hash === hash)
+              passedHashes.push({
+                hash: hash,
+                count: duplicated.length,
+                elements: duplicated
+              })
+            }
+          }
+      })
+
+      passedHashes.sort((x, y) => y.count - x.count)
+      return passedHashes[0]
+    }
+
+    this.walkThroughLevels(_ => {}, level => {
+      const mostRepeatedLevelHash = getMostRepeatedHash(level)
+      patterns.push(mostRepeatedLevelHash)
+    })
+
+    for (let pattern of patterns) {
+      if (pattern.count > 1) {
+        return pattern.elements
+      }
+    }
+
+    return null
   }
 }
 

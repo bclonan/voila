@@ -39,6 +39,18 @@ class Branch {
 
     return sha1(subTreeHashObject.join())
   }
+
+  contains (fn) {
+    let contains = false
+
+    Branch.forEach(child => {
+      if (fn(child)) {
+        contains = true
+      }
+    }, this)
+
+    return contains
+  }
 }
 
 Branch.forEach = function forEach (fn, node) {

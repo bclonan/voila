@@ -24,6 +24,32 @@ test('hash simple branch', t => {
   t.is(hash, currentRootBranchHash)
 })
 
+test('different hashes for branches', t => {
+  //one tree
+  const rootBranch1 = new Branch(null)
+  rootBranch1.tagName = 'DIV'
+
+  const subBranch1 = new Branch(rootBranch1);
+  subBranch1.tagName = 'INPUT'
+
+  rootBranch1.children.push(subBranch1)
+
+  //second tree
+  const rootBranch2 = new Branch(null)
+  rootBranch2.tagName = 'DIV'
+
+  const subBranch2 = new Branch(rootBranch2);
+  subBranch2.tagName = 'SPAN'
+
+  rootBranch2.children.push(subBranch2)
+
+  const hash1 = rootBranch1.getSubTreeHash()
+  const hash2 = rootBranch2.getSubTreeHash()
+
+  t.not(hash1, hash2)
+})
+
+
 test('foreach branch', t => {
   const rootBranch = new Branch(null)
   rootBranch.tagName = 'DIV'
@@ -41,4 +67,17 @@ test('foreach branch', t => {
   Branch.forEach(c => joinedTags.push(c.tagName), rootBranch)
 
   t.deepEqual(joinedTags, ['DIV', 'INPUT', 'SPAN'])
+})
+
+test('contains', t => {
+  const rootBranch = new Branch(null)
+  rootBranch.tagName = 'DIV'
+
+  const subBranch = new Branch(rootBranch);
+  subBranch.tagName = 'INPUT'
+
+  rootBranch.children.push(subBranch)
+
+  const containsInput = rootBranch.contains(x => x.tagName === 'INPUT')
+  t.is(containsInput, true)
 })
