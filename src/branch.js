@@ -1,3 +1,5 @@
+import sha1 from './lib/sha1-min'
+
 class Branch {
   constructor (parent) {
     this.parent = parent
@@ -31,13 +33,12 @@ class Branch {
     }
   }
 
-  // print () {
-  //   console.log('Branch:', this.tagName, this.parent, this.html)
-  //
-  //   for (let i = 0; i < this.children.length; i++) {
-  //     this.children[i].print()
-  //   }
-  // }
+  getSubTreeHash () {
+    const subTreeHashObject = this.children
+      .reduce((accumulator, child) => accumulator.concat(child.tagName), [])
+
+    return sha1(subTreeHashObject.join())
+  }
 }
 
 export default Branch

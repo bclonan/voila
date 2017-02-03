@@ -13,6 +13,10 @@ class Tree {
     this.root = new Branch(null)
     this.root.fill(elements)
   }
+
+  calculateHashes () {
+    
+  }
 }
 
 export default Tree
