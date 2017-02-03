@@ -85,7 +85,7 @@ test('contains', t => {
 test('get input from last detected pattern', t => {
   const rootBranch = new Branch(null)
   const template = document.createElement('template')
-  template.innerHTML = '<div><p><span>Name:</span></p><div><input type="text" id="name" name="name"></div></div>'
+  template.innerHTML = '<div><p><input type="hidden" value="boo"><span>Name:</span></p><div><input type="text" id="name" name="name"></div></div>'
 
   rootBranch.element = template.content.firstChild
   console.log(rootBranch.getInputFromPattern())

@@ -1,10 +1,22 @@
 import sha1 from './lib/sha1-min'
 
 const InputTypes = ['input', 'textarea', 'select']
+let flatten =
+  (arr,depth = Infinity) =>
+    arr.reduce(
+      (list,v) =>
+        list.concat(
+          depth > 0 ?
+            (depth > 1 && Array.isArray( v ) ?
+                flatten( v, depth - 1 ) :
+                v
+            ) :
+            [v]
+        )
+      , [] )
 
 function _getTextFromElementParent(element) {
   let text = ''
-
   let root = element,
     iter = document.createNodeIterator(root, NodeFilter.SHOW_TEXT),
     textnode
@@ -13,6 +25,17 @@ function _getTextFromElementParent(element) {
     text = (textnode.wholeText !== '') ? textnode.wholeText : text
   }
 
+  return text
+}
+
+function _getTextFromElement(element) {
+  let parent = element.parentElement
+  let text = _getTextFromElementParent(parent)
+  if (text === '') {
+    if (this.element !== parent) {
+      text = _getTextFromElement.call(this, parent)
+    }
+  }
   return text
 }
 
@@ -70,17 +93,21 @@ class Branch {
 
   getInputFromPattern () {
     let inputList = InputTypes.map(tag => { // tagName
-      return (this.element.getElementsByTagName(tag).length === 1) ? this.element.getElementsByTagName(tag)[0] : null
-    }).filter((input) => input)
+      return this.element.getElementsByTagName(tag)
+    }).filter((input) => input.length !== 0).map(inputCollection => {
+      let collection = []
+      for (let el of inputCollection) {
+        collection.push(el)
+      }
+      return collection
+    })
 
-    let parent = inputList[0].parent
-    let text = _getTextFromElementParent(parent)
-    if (text === '' && this.element === parent.parent) {
-      return _getTextFromElementParent(this.element)
-    } else {
+    let inputObj = flatten(inputList).filter((input) => input.type !== 'hidden')[0]
 
+    return {
+      input: inputObj,
+      text: _getTextFromElement.call(this, inputObj)
     }
-    return _getTextFromElementParent(inputList)
   }
 }
 
