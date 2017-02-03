@@ -95,7 +95,7 @@ test('find patterns', t => {
   tree.getPatterns()
 })
 
-test('walk through the tree', t => {
+test.skip('walk through the tree [test has not been finished]', t => {
   const html = getHtml('<form>' +
     '<div>' +
       '<span>field 1</span>' +
