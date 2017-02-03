@@ -1,6 +1,33 @@
 import test from 'ava'
+import browserEnv from 'browser-env'
 
 import Branch from './branch'
+
+const getHtml = (str) => {
+  var d = document.createElement('div');
+  d.innerHTML = str;
+  return d.firstChild;
+}
+
+test('fill from select field, skip option tags from the tree', t => {
+  const html = getHtml('<div>' +
+    '<select>' +
+      '<option>Option1</option>' +
+      '<option>Option2</option>' +
+      '<option>Option3</option>' +
+    '</select>' +
+  '</div>')
+
+  const branch = new Branch(null)
+  branch.fill(html)
+
+  t.is(branch.tagName, 'DIV')
+
+  const child = branch.children[0]
+  t.is(child.tagName, 'SELECT')
+  t.is(child.tagCode, 'FIELD')
+  t.is(child.children.length, 0)
+})
 
 test('hash empty branch', t => {
   const branch = new Branch(null)
@@ -12,34 +39,36 @@ test('hash empty branch', t => {
 
 test('hash simple branch', t => {
   const rootBranch = new Branch(null)
-  rootBranch.tagName = 'DIV'
+  rootBranch.tagCode = 'DIV'
 
   const subBranch = new Branch(rootBranch);
   subBranch.tagName = 'INPUT'
+  subBranch.tagCode = 'FIELD'
 
   rootBranch.children.push(subBranch)
 
   const hash = rootBranch.getSubTreeHash()
-  const currentRootBranchHash = 'bb2fe63e5a32cb2596d9f60d2ae271ae4d1c1787'
+  const currentRootBranchHash = '987f4e96caf5df1037efbd4ee25756938e9da844'
   t.is(hash, currentRootBranchHash)
 })
 
 test('different hashes for branches', t => {
   //one tree
   const rootBranch1 = new Branch(null)
-  rootBranch1.tagName = 'DIV'
+  rootBranch1.tagCode = 'DIV'
 
   const subBranch1 = new Branch(rootBranch1);
   subBranch1.tagName = 'INPUT'
+  subBranch1.tagCode = 'FIELD'
 
   rootBranch1.children.push(subBranch1)
 
   //second tree
   const rootBranch2 = new Branch(null)
-  rootBranch2.tagName = 'DIV'
+  rootBranch2.tagCode = 'DIV'
 
   const subBranch2 = new Branch(rootBranch2);
-  subBranch2.tagName = 'SPAN'
+  subBranch2.tagCode = 'SPAN'
 
   rootBranch2.children.push(subBranch2)
 
@@ -52,33 +81,35 @@ test('different hashes for branches', t => {
 
 test('foreach branch', t => {
   const rootBranch = new Branch(null)
-  rootBranch.tagName = 'DIV'
+  rootBranch.tagCode = 'DIV'
 
   const subBranch = new Branch(rootBranch);
   subBranch.tagName = 'INPUT'
+  subBranch.tagCode = 'FIELD'
 
   const subBranch2 = new Branch(rootBranch);
-  subBranch2.tagName = 'SPAN'
+  subBranch2.tagCode = 'SPAN'
 
   rootBranch.children.push(subBranch)
   rootBranch.children.push(subBranch2)
 
   const joinedTags = []
-  Branch.forEach(c => joinedTags.push(c.tagName), rootBranch)
+  Branch.forEach(c => joinedTags.push(c.tagCode), rootBranch)
 
-  t.deepEqual(joinedTags, ['DIV', 'INPUT', 'SPAN'])
+  t.deepEqual(joinedTags, ['DIV', 'FIELD', 'SPAN'])
 })
 
 test('contains', t => {
   const rootBranch = new Branch(null)
-  rootBranch.tagName = 'DIV'
+  rootBranch.tagCode = 'DIV'
 
   const subBranch = new Branch(rootBranch);
   subBranch.tagName = 'INPUT'
+  subBranch.tagCode = 'FIELD'
 
   rootBranch.children.push(subBranch)
 
-  const containsInput = rootBranch.contains(x => x.tagName === 'INPUT')
+  const containsInput = rootBranch.contains(x => x.tagCode === 'FIELD')
   t.is(containsInput, true)
 })
 
@@ -87,6 +118,11 @@ test('get input from last detected pattern', t => {
   const template = document.createElement('template')
   template.innerHTML = '<div><p><input type="hidden" value="boo"><span>Name:</span></p><div><input type="text" id="name" name="name"></div></div>'
 
-  rootBranch.element = template.content.firstChild
-  console.log(rootBranch.getInputFromPattern())
+  rootBranch.fill(template.content.firstChild)
+  const {field, question} = rootBranch.getInputFromPattern()
+
+  t.is(question, 'Name:')
+  //field here is a html element
+  t.is(field.tagName, 'INPUT')
+  t.is(field.id, 'name')
 })

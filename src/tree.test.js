@@ -41,11 +41,12 @@ test('base tree parser', t => {
   t.is(tree.root.tagName, 'FORM')
   t.is(tree.root.children.length, 2)
 
-  t.is(p1.tagName, 'DIV')
-  t.is(p1.children[1].tagName, 'P')
+  t.is(p1.tagCode, 'DIV')
+  t.is(p1.children[1].tagCode, 'P')
   t.is(p2.html, '<span>field 2</span><input type=\"text\" id=\"field2\">')
 
   t.is(p1_input.tagName, 'INPUT')
+  t.is(p1_input.tagCode, 'FIELD')
   t.is(p2_input.parent.tagName, 'DIV')
 })
 
@@ -58,41 +59,17 @@ test('calculate hashes', t => {
 
   t.deepEqual(hashes, [
     'bfd0ee65c0322f8cb14776f89913c7e49797697f',
-    'ecf2a7d7b0f5f6ea7a3172152b17e525f4ace4dd',
-    '372ea08cab33e71c02c651dbc83a474d32c676ea',
+    '89290e96978f53d3dba9b9d86fe8b448525adc1f',
+    '7d4e42ef9d04a046b5679f952cb0b6b5c498c73c',
     'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-    '372ea08cab33e71c02c651dbc83a474d32c676ea',
+    '7d4e42ef9d04a046b5679f952cb0b6b5c498c73c',
     'da39a3ee5e6b4b0d3255bfef95601890afd80709',
     'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-    '8d6ab4d43de39841fb65d9e6fc81ace532f0ba1d',
-    '372ea08cab33e71c02c651dbc83a474d32c676ea',
+    '48fe65d2f3fcf414e938de527db88cc42a9d3d63',
+    '7d4e42ef9d04a046b5679f952cb0b6b5c498c73c',
     'da39a3ee5e6b4b0d3255bfef95601890afd80709',
     'da39a3ee5e6b4b0d3255bfef95601890afd80709'
   ])
-})
-
-test('find patterns', t => {
-  const html = getHtml('<form>' +
-    '<div>' +
-      '<span>field 1</span>' +
-      '<p>Bla</p>' +
-      '<input type="text" id="field1" />' +
-    '</div>' +
-    '<div>' +
-      '<span>field 2</span>' +
-      '<input type="text" id="field2" />' +
-    '</div>' +
-    '<div>' +
-      '<span>field 3</span>' +
-      '<input type="text" id="field3" />' +
-    '</div>' +
-  '</form>')
-
-  const tree = new Tree()
-  tree.fill(html)
-
-  tree.calculateHashes()
-  tree.getPatterns()
 })
 
 test.skip('walk through the tree [test has not been finished]', t => {
