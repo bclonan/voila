@@ -44,7 +44,7 @@ class Branch {
 Branch.forEach = function forEach (fn, node) {
   fn(node)
 
-  node.children.forEach(child => fn(child))
+  node.children.forEach(child => forEach(fn, child))
 }
 
 export default Branch

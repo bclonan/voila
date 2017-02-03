@@ -59,6 +59,14 @@ test('calculate hashes', t => {
   t.deepEqual(hashes, [
     'bfd0ee65c0322f8cb14776f89913c7e49797697f',
     'ecf2a7d7b0f5f6ea7a3172152b17e525f4ace4dd',
-    '8d6ab4d43de39841fb65d9e6fc81ace532f0ba1d'
+    '372ea08cab33e71c02c651dbc83a474d32c676ea',
+    'da39a3ee5e6b4b0d3255bfef95601890afd80709',
+    '372ea08cab33e71c02c651dbc83a474d32c676ea',
+    'da39a3ee5e6b4b0d3255bfef95601890afd80709',
+    'da39a3ee5e6b4b0d3255bfef95601890afd80709',
+    '8d6ab4d43de39841fb65d9e6fc81ace532f0ba1d',
+    '372ea08cab33e71c02c651dbc83a474d32c676ea',
+    'da39a3ee5e6b4b0d3255bfef95601890afd80709',
+    'da39a3ee5e6b4b0d3255bfef95601890afd80709'
   ])
 })
