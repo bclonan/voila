@@ -19,6 +19,33 @@ class Tree {
       b.hash = b.getSubTreeHash()
     }, this.root)
   }
+
+  walkThroughLevels (fn, levelfn) {
+    const stack = this.root.children
+    const levelStack = []
+
+    while (stack.length > 0) {
+      levelfn(stack)
+
+      while (stack.length > 0) {
+        const stackElement = stack.shift()
+        fn(stackElement)
+
+        stackElement.children.forEach(x => levelStack.push(x))
+      }
+      //stack = []
+
+      while (levelStack.length > 0) {
+        stack.push(levelStack.shift())
+      }
+    }
+  }
+
+  getPatterns () {
+    const patterns = []
+
+    return patterns
+  }
 }
 
 export default Tree

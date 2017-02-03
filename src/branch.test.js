@@ -24,7 +24,6 @@ test('hash simple branch', t => {
   t.is(hash, currentRootBranchHash)
 })
 
-
 test('foreach branch', t => {
   const rootBranch = new Branch(null)
   rootBranch.tagName = 'DIV'

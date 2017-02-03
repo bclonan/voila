@@ -70,3 +70,50 @@ test('calculate hashes', t => {
     'da39a3ee5e6b4b0d3255bfef95601890afd80709'
   ])
 })
+
+test('find patterns', t => {
+  const html = getHtml('<form>' +
+    '<div>' +
+      '<span>field 1</span>' +
+      '<p>Bla</p>' +
+      '<input type="text" id="field1" />' +
+    '</div>' +
+    '<div>' +
+      '<span>field 2</span>' +
+      '<input type="text" id="field2" />' +
+    '</div>' +
+    '<div>' +
+      '<span>field 3</span>' +
+      '<input type="text" id="field3" />' +
+    '</div>' +
+  '</form>')
+
+  const tree = new Tree()
+  tree.fill(html)
+
+  tree.calculateHashes()
+  tree.getPatterns()
+})
+
+test('walk through the tree', t => {
+  const html = getHtml('<form>' +
+    '<div>' +
+      '<span>field 1</span>' +
+      '<p>Bla</p>' +
+      '<input type="text" id="field1" />' +
+    '</div>' +
+    '<div>' +
+      '<span>field 2</span>' +
+      '<input type="text" id="field2" />' +
+    '</div>' +
+    '<div>' +
+      '<span>field 3</span>' +
+      '<input type="text" id="field3" />' +
+    '</div>' +
+  '</form>')
+
+  const tree = new Tree()
+  tree.fill(html)
+
+  tree.walkThroughLevels(branch => {}, level => {})
+})
