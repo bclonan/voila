@@ -15,7 +15,9 @@ class Tree {
   }
 
   calculateHashes () {
-    
+    Branch.forEach(b => {
+      b.hash = b.getSubTreeHash()
+    }, this.root)
   }
 }
 
