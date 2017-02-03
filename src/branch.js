@@ -23,16 +23,11 @@ class Branch {
     this.html = element.innerHTML
     this.element = element
 
-    let i = 0
-    let child = element.childNodes[i]
-    while (child) {
+    for (let child of element.childNodes) {
       let childBranch = new Branch(this)
       childBranch.fill(child)
 
       this.children.push(childBranch)
-
-      i++
-      child = element.childNodes[i]
     }
   }
 
