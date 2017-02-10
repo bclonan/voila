@@ -1,27 +1,29 @@
 import test from 'ava'
 import browserEnv from 'browser-env'
+import {stripIndents} from 'common-tags'
 
 import Tree from './tree'
 import Branch from './branch'
 
 const getHtml = (str) => {
-  var d = document.createElement('div');
-  d.innerHTML = str;
-  return d.firstChild;
+  var d = document.createElement('div')
+  d.innerHTML = str.replace(/\n/g, '')
+  return d.firstChild
 }
 
 const getFulfilledTree = () => {
-  const html = getHtml('<form>' +
-    '<div>' +
-      '<span>field 1</span>' +
-      '<p>Bla</p>' +
-      '<input type="text" id="field1" />' +
-    '</div>' +
-    '<div>' +
-      '<span>field 2</span>' +
-      '<input type="text" id="field2" />' +
-    '</div>' +
-  '</form>')
+  const str = stripIndents`<form>
+    <div>
+      <span>field 1</span>
+      <p>Bla</p>
+      <input type="text" id="field1" />
+    </div>
+    <div>
+      <span>field 2</span>
+      <input type="text" id="field2" />
+    </div>
+  </form>`
+  const html = getHtml(str)
 
   const tree = new Tree()
   tree.fill(html)
@@ -73,21 +75,22 @@ test('calculate hashes', t => {
 })
 
 test.skip('walk through the tree [test has not been finished]', t => {
-  const html = getHtml('<form>' +
-    '<div>' +
-      '<span>field 1</span>' +
-      '<p>Bla</p>' +
-      '<input type="text" id="field1" />' +
-    '</div>' +
-    '<div>' +
-      '<span>field 2</span>' +
-      '<input type="text" id="field2" />' +
-    '</div>' +
-    '<div>' +
-      '<span>field 3</span>' +
-      '<input type="text" id="field3" />' +
-    '</div>' +
-  '</form>')
+  const html = getHtml(stripIndents`
+  <form>
+    <div>
+      <span>field 1</span>
+      <p>Bla</p>
+      <input type="text" id="field1" />
+    </div>
+    <div>
+      <span>field 2</span>
+      <input type="text" id="field2" />
+    </div>
+    <div>
+      <span>field 3</span>
+      <input type="text" id="field3" />
+    </div>
+  </form>`)
 
   const tree = new Tree()
   tree.fill(html)
@@ -96,21 +99,22 @@ test.skip('walk through the tree [test has not been finished]', t => {
 })
 
 test('find patterns', t => {
-  const html = getHtml('<form>' +
-    '<div>' +
-      '<span>field 1</span>' +
-      '<p>Bla</p>' +
-      '<input type="text" id="field1" />' +
-    '</div>' +
-    '<div>' +
-      '<span>field 2</span>' +
-      '<input type="text" id="field2" />' +
-    '</div>' +
-    '<div>' +
-      '<span>field 3</span>' +
-      '<input type="text" id="field3" />' +
-    '</div>' +
-  '</form>')
+  const html = getHtml(stripIndents`
+  <form>
+    <div>
+      <span>field 1</span>
+      <p>Bla</p>
+      <input type="text" id="field1" />
+    </div>
+    <div>
+      <span>field 2</span>
+      <input type="text" id="field2" />
+    </div>
+    <div>
+      <span>field 3</span>
+      <input type="text" id="field3" />
+    </div>
+  </form>`)
 
   const tree = new Tree()
   tree.fill(html)
