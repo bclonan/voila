@@ -16,7 +16,7 @@ class Converter():
         self.formHashRepository = FormHashRepository()
 
     def prepareEmbed(self, formUid, formName):
-        embedUrl = 'https://morphling1.typeform.com/to/' + formUid
+        embedUrl = 'https://voila.typeform.com/to/' + formUid
         formName = formName
         formStyle =  'width:100%;height:500px;'
         embedCode = ('<!-- Change the width and height values to suit you best -->'
