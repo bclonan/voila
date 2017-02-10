@@ -8,7 +8,7 @@ Convert HTML to Typeform on the fly.
 2. Clone this repository
 3. Go to the folder you clone it
 5. Run `docker-compose up`
-6. Violà
+6. Voilà
 
 ## Endpoints
 The server has 2 endpoints that help run the middleware.
