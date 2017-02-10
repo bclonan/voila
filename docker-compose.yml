@@ -3,7 +3,7 @@ version: '2'
 services:
   python:
       build: ./api/server
-      container_name: morphling_api
+      container_name: voila_api
       links:
           - redis
       ports:
@@ -11,5 +11,5 @@ services:
 
   redis:
       build: ./api/redis
-      container_name: morphling_redis
+      container_name: voila_redis
       

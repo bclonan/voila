@@ -21,14 +21,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Typeform/Morphling.git"
+    "url": "git+https://github.com/Typeform/voila.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Typeform/Morphling/issues"
+    "url": "https://github.com/Typeform/voila/issues"
   },
-  "homepage": "https://github.com/Typeform/Morphling#readme",
+  "homepage": "https://github.com/Typeform/voila#readme",
   "babel": {
     "presets": [
       "es2015"
