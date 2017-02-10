@@ -45,6 +45,14 @@ function _getTextFromElement(element) {
   return text
 }
 
+const _isNotHidden = (input) => {
+  return input.type !== 'hidden';
+}
+
+const _hasContent = (input) => {
+  return input.length !== 0;
+}
+
 class Branch {
   constructor (parent) {
     this.parent = parent
@@ -106,9 +114,9 @@ class Branch {
   }
 
   getInputFromPattern () {
-    let inputList = InputTypes.map(tag => { // tagName
+    let inputList = InputTypes.map(tag => {
       return this.element.getElementsByTagName(tag)
-    }).filter((input) => input.length !== 0).map(inputCollection => {
+    }).filter(_hasContent).map(inputCollection => {
       let collection = []
       for (let el of inputCollection) {
         collection.push(el)
@@ -116,7 +124,7 @@ class Branch {
       return collection
     })
 
-    let inputObj = flatten(inputList).filter((input) => input.type !== 'hidden')[0]
+    let inputObj = flatten(inputList).filter(_isNotHidden)[0]
 
     return {
       field: inputObj,
