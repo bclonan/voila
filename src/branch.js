@@ -3,19 +3,19 @@ import sha1 from './lib/sha1-min'
 const InputTypes = ['INPUT', 'TEXTAREA', 'SELECT']
 const LabelTypes = ['LABEL', 'SPAN', 'B', 'STRONG', 'SMALL', 'P']
 
-let flatten =
-  (arr,depth = Infinity) =>
-    arr.reduce(
-      (list,v) =>
-        list.concat(
-          depth > 0 ?
-            (depth > 1 && Array.isArray( v ) ?
-                flatten( v, depth - 1 ) :
-                v
-            ) :
-            [v]
-        )
-      , [] )
+Array.prototype.flatten = function (depth = Infinity) {
+  return this.reduce(
+    (list,v) =>
+      list.concat(
+        depth > 0 ?
+          (depth > 1 && Array.isArray( v ) ?
+              v.flatten( depth - 1 ) :
+              v
+          ) :
+          [v]
+      )
+    , [] )
+}
 
 const SkipFieldChildren = ['OPTION']
 const FIELD_CODE = 'FIELD'
@@ -51,6 +51,14 @@ const _isNotHidden = (input) => {
 
 const _hasContent = (input) => {
   return input.length !== 0;
+}
+
+const _moveInputCollectionToArray = (inputCollection) => {
+  let collection = []
+  for (let el of inputCollection) {
+    collection.push(el)
+  }
+  return collection
 }
 
 class Branch {
@@ -114,17 +122,15 @@ class Branch {
   }
 
   getInputFromPattern () {
-    let inputList = InputTypes.map(tag => {
-      return this.element.getElementsByTagName(tag)
-    }).filter(_hasContent).map(inputCollection => {
-      let collection = []
-      for (let el of inputCollection) {
-        collection.push(el)
-      }
-      return collection
-    })
-
-    let inputObj = flatten(inputList).filter(_isNotHidden)[0]
+    let inputObj = InputTypes
+      .map(tag => {
+        return this.element.getElementsByTagName(tag)
+      })
+      .filter(_hasContent)
+      .map(_moveInputCollectionToArray)
+      .flatten()
+      .filter(_isNotHidden)
+      .shift()
 
     return {
       field: inputObj,
