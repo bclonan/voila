@@ -102,9 +102,13 @@ class Branch {
   }
 
   getSubTreeHash () {
-    // it is calculating only first layer of hash.. need to calculate all layers, need to think about it
-    const subTreeHashObject = this.children
-      .reduce((accumulator, child) => accumulator.concat(child.tagCode), [])
+    const subTreeHashObject = []
+
+    Branch.forEach(branch => {
+      if (branch !== this) {
+        subTreeHashObject.push(branch.tagCode)
+      }
+    }, this)
 
     return sha1(subTreeHashObject.join())
   }

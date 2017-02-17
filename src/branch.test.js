@@ -1,22 +1,24 @@
 import test from 'ava'
 import browserEnv from 'browser-env'
+import {stripIndents} from 'common-tags'
 
+import sha1 from './lib/sha1-min'
 import Branch from './branch'
 
 const getHtml = (str) => {
-  var d = document.createElement('div');
-  d.innerHTML = str;
-  return d.firstChild;
+  var d = document.createElement('div')
+  d.innerHTML = str.replace(/\n/g, '')
+  return d.firstChild
 }
 
 test('fill from select field, skip option tags from the tree', t => {
-  const html = getHtml('<div>' +
-    '<select>' +
-      '<option>Option1</option>' +
-      '<option>Option2</option>' +
-      '<option>Option3</option>' +
-    '</select>' +
-  '</div>')
+  const html = getHtml(stripIndents`<div>
+    <select>
+      <option>Option1</option>
+      <option>Option2</option>
+      <option>Option3</option>
+    </select>
+  </div>`)
 
   const branch = new Branch(null)
   branch.fill(html)
@@ -33,7 +35,7 @@ test('hash empty branch', t => {
   const branch = new Branch(null)
 
   const hash = branch.getSubTreeHash()
-  const emptyStringSha1Hash = 'da39a3ee5e6b4b0d3255bfef95601890afd80709'
+  const emptyStringSha1Hash = sha1('')
   t.is(hash, emptyStringSha1Hash)
 })
 
@@ -45,10 +47,20 @@ test('hash simple branch', t => {
   subBranch.tagName = 'INPUT'
   subBranch.tagCode = 'FIELD'
 
+  const subBranch2 = new Branch(rootBranch);
+  subBranch2.tagName = 'DIV'
+  subBranch2.tagCode = 'DIV'
+
+  const subBranch23 = new Branch(rootBranch);
+  subBranch23.tagName = 'LABEL'
+  subBranch23.tagCode = 'LABEL'
+
+  subBranch2.children.push(subBranch23)
   rootBranch.children.push(subBranch)
+  rootBranch.children.push(subBranch2)
 
   const hash = rootBranch.getSubTreeHash()
-  const currentRootBranchHash = '987f4e96caf5df1037efbd4ee25756938e9da844'
+  const currentRootBranchHash = sha1('FIELD,' + 'DIV,' + 'LABEL')
   t.is(hash, currentRootBranchHash)
 })
 

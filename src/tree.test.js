@@ -2,6 +2,7 @@ import test from 'ava'
 import browserEnv from 'browser-env'
 import {stripIndents} from 'common-tags'
 
+import sha1 from './lib/sha1-min'
 import Tree from './tree'
 import Branch from './branch'
 
@@ -59,19 +60,21 @@ test('calculate hashes', t => {
   const hashes = []
   Branch.forEach(b => hashes.push(b.hash), tree.root)
 
-  t.deepEqual(hashes, [
-    'bfd0ee65c0322f8cb14776f89913c7e49797697f',
-    '89290e96978f53d3dba9b9d86fe8b448525adc1f',
-    '7d4e42ef9d04a046b5679f952cb0b6b5c498c73c',
-    'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-    '7d4e42ef9d04a046b5679f952cb0b6b5c498c73c',
-    'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-    'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-    '48fe65d2f3fcf414e938de527db88cc42a9d3d63',
-    '7d4e42ef9d04a046b5679f952cb0b6b5c498c73c',
-    'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-    'da39a3ee5e6b4b0d3255bfef95601890afd80709'
-  ])
+  const expectedHashes = [
+    sha1(['DIV', 'SPAN', 'TEXT', 'P', 'TEXT', 'FIELD', 'DIV', 'SPAN', 'TEXT', 'FIELD'].join()),
+    sha1(['SPAN', 'TEXT', 'P', 'TEXT', 'FIELD'].join()),
+    sha1(['TEXT'].join()),
+    sha1([].join()),
+    sha1(['TEXT'].join()),
+    sha1([].join()),
+    sha1([].join()),
+    sha1(['SPAN', 'TEXT', 'FIELD'].join()),
+    sha1(['TEXT'].join()),
+    sha1([].join()),
+    sha1([].join())
+  ]
+
+  t.deepEqual(expectedHashes, hashes)
 })
 
 test.skip('walk through the tree [test has not been finished]', t => {
