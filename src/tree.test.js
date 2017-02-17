@@ -1,5 +1,4 @@
 import test from 'ava'
-import browserEnv from 'browser-env'
 import {stripIndents} from 'common-tags'
 
 import sha1 from './lib/sha1-min'

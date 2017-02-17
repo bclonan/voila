@@ -1,7 +1,9 @@
 import sha1 from './lib/sha1-min'
 
 const InputTypes = ['INPUT', 'TEXTAREA', 'SELECT']
-const LabelTypes = ['LABEL', 'SPAN', 'B', 'STRONG', 'SMALL', 'P']
+const LabelTypes = ['LABEL', 'SPAN', 'TEXT', 'B', 'STRONG', 'SMALL', 'P']
+const SkipTypes = ['BR']
+const LABEL_TAG = 'LABEL'
 
 Array.prototype.flatten = function (depth = Infinity) {
   return this.reduce(
@@ -61,6 +63,11 @@ const _moveInputCollectionToArray = (inputCollection) => {
   return collection
 }
 
+const _removeInvalidHtmlTags = (html) => {
+  let regexInvalidHtmlTags = /<\/?(a|abbr|b|bdi|bdo|br|cite|code|data|dfn|em|i|kbd|mark|q|rp|rt|rtc|ruby|s|samp|small|span|strong|sub|sup|time|u|var|wbr|div...)\b[^<>]*>/g
+  return html.replace(regexInvalidHtmlTags, '')
+}
+
 class Branch {
   constructor (parent) {
     this.parent = parent
@@ -94,10 +101,14 @@ class Branch {
     }
 
     for (let child of childNodes) {
-      let childBranch = new Branch(this)
-      childBranch.fill(child)
-
-      this.children.push(childBranch)
+      if (SkipTypes.indexOf(child.tagName) < 0) {
+        if (child.tagName === LABEL_TAG) {
+          child.innerHTML = _removeInvalidHtmlTags(child.innerHTML)
+        }
+        let childBranch = new Branch(this)
+        childBranch.fill(child)
+        this.children.push(childBranch)
+      }
     }
   }
 
