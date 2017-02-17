@@ -157,8 +157,16 @@ class Branch {
     return InputTypes.some(tag => tag === this.tagName)
   }
 
+  isLabel () {
+    return LabelTypes.some(tag => tag === this.tagName)
+  }
+
   containsField () {
     return this.contains(x => x.isField())
+  }
+
+  containsLabel () {
+    return this.contains(x => x.isLabel())
   }
 
   getTagCode (element) {

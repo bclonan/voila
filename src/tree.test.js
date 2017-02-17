@@ -124,8 +124,113 @@ test('find patterns', t => {
   tree.calculateHashes()
 
   const patterns = tree.getPatterns()
-  t.is(patterns.length, 2)
+  t.is(patterns.length, 1)
 
   const firstPattern = patterns[0]
-  t.is(firstPattern.tagName, 'DIV')
+  t.is(firstPattern.elements[0].tagName, 'DIV')
+  t.is(firstPattern.count, 2)
+})
+
+test('find patterns in mail service form', t => {
+  const html = getHtml(stripIndents`
+  <form action="0805_1-answer.asp" id="formu" method="post" name="formu" onsubmit="return ValidaForm(this)">
+    <table border="0" cellpadding="2" cellspacing="0" class="txtNormal">
+      <tbody>
+        <tr>
+          <td width="85"><label for="des_nombre"><strong>Nombre:*</strong></label></td>
+          <td colspan="5"><input class="FormObject" id="des_nombre" maxlength="45" name="des_nombre" size="41" style="width:304" type="text" value=""></td>
+        </tr>
+        <tr>
+          <td height="10"><label for="des_apellidos"><strong>Apellidos:*</strong></label></td>
+          <td colspan="5"><input class="FormObject" id="des_apellido1" maxlength="45" name="des_apellido1" size="41" style="width:304" type="text" value=""></td>
+        </tr>
+        <tr>
+          <td height="10"><label for="des_calle"><strong>Calle:*</strong></label></td>
+          <td><input class="FormObject" id="des_calle" maxlength="200" name="des_calle" size="20" style="width:250" type="text"></td>
+          <td align="left" height="10"><label for="des_numero"><strong>Numero:*</strong></label></td>
+          <td><input class="FormObject" id="des_numero" maxlength="50" name="des_numero" size="14" style="width:50" type="text"></td>
+          <td align="left" height="10"><label for="des_piso"><strong>Piso:*</strong></label></td>
+          <td><input class="FormObject" id="des_piso" maxlength="50" name="des_piso" size="14" style="width:50" type="text"></td>
+        </tr>
+        <tr>
+          <td height="10"><label for="des_poblacion"><strong>Población:*</strong></label></td>
+          <td><input class="FormObject" id="des_poblacion" maxlength="150" name="des_poblacion" size="20" style="width:200" type="text"></td>
+          <td align="left" height="10"><label for="des_provincia"><strong>Provincia:*</strong></label></td>
+          <td colspan="2"><input class="FormObject" id="des_provincia" maxlength="50" name="des_provincia" size="14" style="width:120" type="text"></td>
+        </tr>
+        <tr>
+          <td height="10"><label for="des_apellid2"><strong>Teléfono:</strong></label></td>
+          <td><input class="FormObject" id="des_telefono" maxlength="12" name="des_telefono" size="20" style="width:200" type="text"></td>
+          <td align="left" height="10"><label for="des_cp"><strong>CP:*</strong></label></td>
+          <td colspan="2"><input class="FormObject" id="des_cp" maxlength="5" name="des_cp" size="14" style="width:50" type="text"></td>
+        </tr>
+        <tr>
+          <td height="10"><label for="des_email"><strong>E-Mail:*</strong></label></td>
+          <td colspan="5"><input class="FormObject" id="email1" maxlength="50" name="email1" size="41" type="text" value=""></td>
+        </tr>
+        <tr>
+          <td class="txtSubindice" colspan="6">
+            <br>
+            <p class="txtNormal">* Campo obligatorio</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="txtNormal"><br>
+    Por favor complete el siguiente campo con el texto de su solicitud de información. <b><u>Si su consulta se refiere a un envío postal, por favor haga constar el número de referencia del mismo.</u></b></p>
+    <table border="0" cellpadding="0" cellspacing="0" width="392">
+      <tbody>
+        <tr align="left">
+          <td height="10"><img alt="" height="1" src="/comun/img/pix_fondo.gif" width="1"></td>
+          <td align="left" height="1">
+          <textarea class="FormObject" cols="80" maxlength="800" name="des_mensaje" rows="10" style="width:400"></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <br>
+    <table border="0" cellpadding="0" cellspacing="0" width="450">
+      <tbody>
+        <tr>
+          <td class="sp" height="1" width="1">&nbsp;</td>
+          <td class="sp" height="1" width="1">&nbsp;</td>
+          <td align="left" class="txtDest" colspan="3" height="50">
+            <table border="0" cellpadding="0" cellspacing="0">
+              <tbody>
+                <tr>
+                  <td class="txtNormal"><b><label for="captcha">Verificar Números <sup>1</sup>:&nbsp;</label></b></td>
+                  <td class="txtNormal"><input class="txtNormal" id="captcha" maxlength="8" name="captcha" size="11" type="text"></td>
+                  <td class="txtNormal"><img align="absmiddle" alt="Captcha" height="21" id="imgCaptcha" src="AspCaptcha.asp" title="Captcha" width="86"></td>
+                  <td class="botonst"><input class="botonst" id="btnRecargaCaptcha" name="btnRecargaCaptcha" onclick="recargarCaptcha()" style="width:120px;background:transparent url(/comun/img/fondoBoton.jpg) scroll left top ;border-color:#0A5187;color:#FFFFFF;FONT-FAMILY:Arial, Helvetica, sans-serif;FONT-WEIGHT: bold;margin-left:10px" type="button" value="Nueva Imagen"></td>
+                </tr>
+                <tr class="txtSubindice">
+                  <td colspan="4">&nbsp;</td>
+                </tr>
+                <tr align="left" class="txtSubindice">
+                  <td colspan="4">
+                    <p class="txtNormal"><sup>1</sup> Escribe los caracteres que se ven en la imagen.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" class="txtNormal" colspan="4" valign="top"><br>
+                  <input accesskey="e" class="botonst" style="width:120px;background:transparent url(/comun/img/fondoBoton.jpg) scroll left top ;border-color:#0A5187;color:#FFFFFF;FONT-FAMILY:Arial, Helvetica, sans-serif;FONT-WEIGHT: bold;margin-left:10px" type="submit" value="Enviar"></td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>`)
+
+  const tree = new Tree()
+  tree.fill(html)
+
+  tree.calculateHashes()
+
+  const patterns = tree.getPatterns()
+
+  t.is(2, patterns.length)
+  t.is(3, patterns[0].count)
+  t.is(2, patterns[1].count)
 })
