@@ -13,6 +13,3 @@
       })
     })
 })()
-
-// <form data-typeform='askAwesomely'>
-// </form>
