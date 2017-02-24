@@ -234,3 +234,35 @@ test('find patterns in mail service form', t => {
   t.is(3, patterns[0].count)
   t.is(2, patterns[1].count)
 })
+
+test.skip('longest sequence identification performance test', t => {
+  const tree = new Tree()
+  const amounts = [10, 30, 70, 100, 130, 150, 180, 210]
+
+  console.log('Performance test:')
+
+  const getHashForArray = (arr) => {
+    return sha1(arr.join())
+  }
+
+  amounts.map(x => {
+    console.log('Amount:', x, 'elements in array.')
+
+    const array = []
+    const possibleElements = ['LABEL', 'INPUT', 'SPAN', 'DIV', 'P']
+    for (let i = 0; i < x; i++) {
+      const randomElement = Math.floor(Math.random() * 4)  
+      array.push(possibleElements[randomElement])
+    }
+
+    const t0 = new Date().getTime()
+    const longestPattern = tree.findLongestHashSet(array, getHashForArray)
+    const t1 = new Date().getTime()
+
+    console.log("Call took " + (t1 - t0) + " milliseconds.")
+    console.log(longestPattern)
+    console.log('-----------')
+  })
+
+  t.pass()
+})

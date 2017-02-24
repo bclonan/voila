@@ -1,4 +1,5 @@
 import Branch from './branch'
+import LongestRepeatedSet from './longestRepeatedUniqueSet'
 
 class Tree {
   constructor () {
@@ -83,6 +84,12 @@ class Tree {
     })
 
     return patterns
+  }
+
+  findLongestHashSet (array, getHashForArray) {
+    const root = new LongestRepeatedSet(array)
+    const longestPattern = root.get(getHashForArray)
+    return longestPattern
   }
 }
 

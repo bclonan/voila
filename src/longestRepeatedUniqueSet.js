@@ -60,8 +60,8 @@ class LongestRepeatedUniqueSet {
   hashAllCombinations (arr, getHashForArray) {
     const hashArray = []
 
-    for (let i = 0; i < arr.length - 1; ++i) {
-      for (let j = 1; j < arr.length/2 - 1; ++j) {
+    for (let i = 0; i < arr.length - 1; i++) {
+      for (let j = 1; j < arr.length/2 - 1; j++) {
 
         if (i + j >= arr.length)
           continue
