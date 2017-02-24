@@ -192,4 +192,18 @@ Branch.forEach = function forEach (fn, node) {
   node.children.forEach(child => forEach(fn, child))
 }
 
+Branch.hashArray = function hashArray (arr) {
+  const branchArrayHash = []
+
+  arr.forEach(branch => {
+    Branch.forEach(b => {
+      if (b !== branch) {
+        branchArrayHash.push(b.tagCode)
+      }
+    }, branch)
+  })
+  
+  return sha1(branchArrayHash.join())
+}
+
 export default Branch

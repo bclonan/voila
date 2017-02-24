@@ -86,6 +86,10 @@ class Tree {
     return patterns
   }
 
+  getSequencePattern (level) {
+    return this.findLongestHashSet(level, Branch.hashArray)
+  }
+
   findLongestHashSet (array, getHashForArray) {
     const root = new LongestRepeatedSet(array)
     const longestPattern = root.get(getHashForArray)
