@@ -78,9 +78,30 @@ class Tree {
       return duplications
     }
 
+    const getOtherOrphanPatterns = (level, mostRepeatedLevelHash) => {
+      let orphans = level
+      mostRepeatedLevelHash.forEach(repeated => {
+        orphans = level.filter(branch => {
+          return !(branch.hash === repeated.hash)
+        })
+      })
+      return orphans.map(orphanBranch => {
+        return {
+          hash: orphanBranch.hash,
+          elements: orphanBranch.element,
+          count: 1
+        }
+      })
+    }
+
     this.walkThroughLevels(_ => {}, level => {
       const mostRepeatedLevelHash = getMostRepeatedHash(level)
+      const orphanLevelHashes = getOtherOrphanPatterns(level, mostRepeatedLevelHash)
+           
       Array.prototype.push.apply(patterns, mostRepeatedLevelHash)
+      if (orphanLevelHashes.length > 0) {
+        Array.prototype.push.apply(patterns, orphanLevelHashes)
+      }
     })
 
     return patterns
