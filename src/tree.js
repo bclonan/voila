@@ -34,7 +34,7 @@ class Tree {
 
         stackElement.children.forEach(x => levelStack.push(x))
       }
-      //stack = []
+      //here stack variable always = []
 
       while (levelStack.length > 0) {
         stack.push(levelStack.shift())
