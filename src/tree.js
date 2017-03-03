@@ -85,36 +85,95 @@ class Tree {
           return !(branch.hash === repeated.hash)
         })
       })
-      return orphans.map(orphanBranch => {
-        return {
-          hash: orphanBranch.hash,
-          elements: orphanBranch.element,
-          count: 1
-        }
-      })
+      return orphans
     }
 
     this.walkThroughLevels(_ => {}, level => {
       const mostRepeatedLevelHash = getMostRepeatedHash(level)
       const orphanLevelHashes = getOtherOrphanPatterns(level, mostRepeatedLevelHash)
-           
+
+      console.log('Level length:', level.length, 'Orphan length:', orphanLevelHashes.length)
+      const orphanLevelPatterns = this.getSequencePattern(orphanLevelHashes)
+
       Array.prototype.push.apply(patterns, mostRepeatedLevelHash)
-      if (orphanLevelHashes.length > 0) {
-        Array.prototype.push.apply(patterns, orphanLevelHashes)
-      }
+      Array.prototype.push.apply(patterns, orphanLevelPatterns)
     })
 
     return patterns
   }
 
   getSequencePattern (level) {
+    console.log('Level:', level.map(x => x.tagCode))
     return this.findLongestHashSet(level, Branch.hashArray)
   }
 
   findLongestHashSet (array, getHashForArray) {
     const root = new LongestRepeatedSet(array)
-    const longestPattern = root.get(getHashForArray)
+    const longestPattern = root.get(getHashForArray, x => x.hash)
     return longestPattern
+  }
+
+  findAll (condition) {
+    const found = []
+
+    Branch.forEach(x => {
+      if (condition(x)) {
+        found.push(x)
+      }
+    }, this.root)
+
+    return found
+  }
+
+  findBefore (condition, current) {
+    const result = []
+
+    let parent = current.parent
+    let currentCheckBranch = current
+
+    while (parent !== this.root && parent !== null) {
+      const level = parent.children
+      const stack = []
+
+      const currentElementIndex = level.indexOf(currentCheckBranch)
+      for (let i = currentElementIndex - 1; i >= 0; i--){
+        const currentLevelElement = level[i]
+        if (currentLevelElement === currentCheckBranch) {
+          break;
+        }
+
+        Branch.forEach(x => {
+          if (condition(x)) {
+            stack.push(x)
+          }
+        }, currentLevelElement)
+
+        while (stack.length > 0) {
+          let el = stack.pop()
+          result.push(el)
+        }
+      }
+
+      currentCheckBranch = parent
+      parent = parent.parent
+    }
+
+    return result
+  }
+
+  getFieldsWithLabels () {
+    const result = []
+    
+    const fields = this.findAll(x => x.isField())
+    fields.forEach(f => {
+      const labels = this.findBefore(x => x.isLabel(), f)
+      const field = f
+      const label = labels[0] && labels[0].tagCode === 'TEXT' ? labels[0].parent : labels[0]
+
+      result.push({field, label})
+    })
+
+    return result
   }
 }
 

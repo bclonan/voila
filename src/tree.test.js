@@ -131,7 +131,7 @@ test('find patterns', t => {
   t.is(firstPattern.count, 2)
 })
 
-test.only('find patterns in mail service form', t => {
+test.skip('find patterns in mail service form', t => {
   const html = getHtml(stripIndents`
   <form action="0805_1-answer.asp" id="formu" method="post" name="formu" onsubmit="return ValidaForm(this)">
     <table border="0" cellpadding="2" cellspacing="0" class="txtNormal">
@@ -226,13 +226,13 @@ test.only('find patterns in mail service form', t => {
   const tree = new Tree()
   tree.fill(html)
 
-  tree.calculateHashes()
-
-  const patterns = tree.getPatterns()
-  console.log(patterns)
-  t.is(2, patterns.length)
-  t.is(3, patterns[0].count)
-  t.is(2, patterns[1].count)
+  const result = tree.getFieldsWithLabels()
+  console.log(result.map(x => {
+    return {
+      field: x.field ? x.field.parent.html : null,
+      label: x.label ? x.label.html : null
+    }
+  }))
 })
 
 test.skip('longest sequence identification performance test', t => {

@@ -1,32 +1,99 @@
 import test from 'ava'
 import { elPais, elMundo, restaurant, bank, mailService, airline } from './form.examples'
+import Tree from './tree'
+
+const getHtml = (str) => {
+  var d = document.createElement('div')
+  d.innerHTML = str.replace(/\n/g, '')
+  return d.firstChild
+}
 
 test('Newspaper El País contact form', t => {
-  //console.log(elPais)
-  t.pass()
+  const html = getHtml(elPais)
+
+  const tree = new Tree()
+  tree.fill(html)
+
+  const result = tree.getFieldsWithLabels()
+  console.log(result.map(x => {
+    return {
+      field: x.field ? x.field.parent.html : null,
+      label: x.label ? x.label.html : null
+    }
+  }))
 })
 
 test('Newspaper El Mundo contact form', t => {
-  //console.log(elMundo)
-  t.pass()
+  const html = getHtml(elMundo)
+
+  const tree = new Tree()
+  tree.fill(html)
+
+  const result = tree.getFieldsWithLabels()
+  console.log(result.map(x => {
+    return {
+      field: x.field ? x.field.parent.html : null,
+      label: x.label ? x.label.html : null
+    }
+  }))
 })
 
 test('Restaurant contact form', t => {
-  //console.log(restaurant)
-  t.pass()
+  const html = getHtml(restaurant)
+
+  const tree = new Tree()
+  tree.fill(html)
+
+  const result = tree.getFieldsWithLabels()
+  console.log(result.map(x => {
+    return {
+      field: x.field ? x.field.parent.html : null,
+      label: x.label ? x.label.html : null
+    }
+  }))
 })
 
 test('Bank Triodos contact form', t => {
-  //console.log(bank)
-  t.pass()
+  const html = getHtml(bank)
+
+  const tree = new Tree()
+  tree.fill(html)
+
+  const result = tree.getFieldsWithLabels()
+  console.log(result.map(x => {
+    return {
+      field: x.field ? x.field.parent.html : null,
+      label: x.label ? x.label.html : null
+    }
+  }))
 })
 
 test('Mail service Correos contact form (table)', t => {
-  //console.log(mailService)
-  t.pass()
+  const html = getHtml(mailService)
+
+  const tree = new Tree()
+  tree.fill(html)
+
+  const result = tree.getFieldsWithLabels()
+  console.log(result.map(x => {
+    return {
+      field: x.field ? x.field.parent.html : null,
+      label: x.label ? x.label.html : null
+    }
+  }))
 })
 
-test('Airline service Ryanair contact form (dt)', t => {
-  //console.log(airline)
-  t.pass()
+test.only('Airline service Ryanair contact form (dt)', t => {
+  const html = getHtml(airline)
+
+  const tree = new Tree()
+  tree.fill(html)
+
+  const result = tree.getFieldsWithLabels()
+  console.log(result.map(x => {
+    return {
+      field: x.field ? x.field.parent.html : null,
+      label: x.label ? x.label.html : null
+    }
+  }))
 })

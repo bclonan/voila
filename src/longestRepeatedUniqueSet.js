@@ -26,9 +26,9 @@ class LongestRepeatedUniqueSet {
     return false
   }
 
-  hasUniqueElement (set) {
+  hasUniqueElement (set, getKey) {
     for (let i = 0; i < set.length; i++) {
-      if (set[i] !== set[0]) {
+      if (getKey(set[i]) !== getKey(set[0])) {
         return true
       }
     }
@@ -57,17 +57,17 @@ class LongestRepeatedUniqueSet {
     return result
   }
 
-  hashAllCombinations (arr, getHashForArray) {
+  hashAllCombinations (arr, getHashForArray, getKey) {
     const hashArray = []
 
     for (let i = 0; i < arr.length - 1; i++) {
-      for (let j = 1; j < arr.length/2 - 1; j++) {
+      for (let j = 1; j <= arr.length/2 - 1; j++) {
 
         if (i + j >= arr.length)
           continue
 
         const sub = this.subSet(i, i + j, arr)
-        const hasUniqueElements = this.hasUniqueElement(sub)
+        const hasUniqueElements = this.hasUniqueElement(sub, getKey)
 
         if (hasUniqueElements) {
           const setHash = getHashForArray(sub)
@@ -119,14 +119,20 @@ class LongestRepeatedUniqueSet {
       }
     }
 
-    return Object.assign(result, {hash: maxHash})
+    if (result && maxCount > 1) {
+      return Object.assign(result, {hash: maxHash})
+    }
+
+    return {}
   }
 
-  get (getHashForArray) {
-    const hashArray = this.hashAllCombinations(this.arr, getHashForArray)
+  get (getHashForArray, getKey) {
+    const hashArray = this.hashAllCombinations(this.arr, getHashForArray, getKey)
     const countByHash = this.countBy(hashArray, x => x.hash, x => x.set)
-    
+    console.log(countByHash)
+
     const pattern = this.findMostOccuring(countByHash)
+    console.log('Pattern:', pattern)
     
     // pattern: 
     // {
