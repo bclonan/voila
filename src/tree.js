@@ -173,11 +173,11 @@ class Tree {
     
     const fields = this.findAll(x => x.isField())
     fields.forEach(f => {
-      const labels = this.findBefore(x => x.isLabel() && x.tagCode !== 'TEXT', f)
+      const labels = this.findBefore(x => x.isLabel() && x.html.trim() !== '', f)
       const field = f
 
       //console.log('Labels found:', labels)
-      const label = labels[0] && labels[0].tagCode === 'TEXT' ? labels[0].parent : labels[0]
+      const label = labels[0]
 
       result.push({field, label})
     })

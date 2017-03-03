@@ -94,6 +94,10 @@ class Branch {
     this.element = element
 
     this.tagCode = this.getTagCode(element)
+    
+    if (this.tagCode === TEXT_CODE) {
+      this.html = element.textContent
+    }
 
     let childNodes = [].concat.apply([], element.childNodes)
     if (this.tagCode === FIELD_CODE) {
