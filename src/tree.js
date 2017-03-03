@@ -131,6 +131,8 @@ class Tree {
     let parent = current.parent
     let currentCheckBranch = current
 
+    //console.log('Check element:', currentCheckBranch.tagCode)
+
     while (parent !== this.root && parent !== null) {
       const level = parent.children
       const stack = []
@@ -142,6 +144,7 @@ class Tree {
           break;
         }
 
+        //console.log('Loop:', currentLevelElement.tagCode)
         Branch.forEach(x => {
           if (condition(x)) {
             stack.push(x)
@@ -156,6 +159,10 @@ class Tree {
 
       currentCheckBranch = parent
       parent = parent.parent
+
+      if (result.length > 0) {
+        return result
+      }
     }
 
     return result
@@ -166,8 +173,10 @@ class Tree {
     
     const fields = this.findAll(x => x.isField())
     fields.forEach(f => {
-      const labels = this.findBefore(x => x.isLabel(), f)
+      const labels = this.findBefore(x => x.isLabel() && x.tagCode !== 'TEXT', f)
       const field = f
+
+      //console.log('Labels found:', labels)
       const label = labels[0] && labels[0].tagCode === 'TEXT' ? labels[0].parent : labels[0]
 
       result.push({field, label})
