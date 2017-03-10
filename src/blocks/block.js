@@ -1,6 +1,6 @@
 class Block {
-  constructor() {
-    this.title = ''
+  constructor(field, label) {
+    this.title = label
     this.type = ''
     this.properties = {}
     this.validations = {

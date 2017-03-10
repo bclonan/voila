@@ -1,9 +1,9 @@
 import Block from './block'
 
-class MultipleChoice extends Block {
+class Dropdown extends Block {
   constructor(field, label) {
     super(field, label)
-    this.type = 'multiple_choice'
+    this.type = 'dropdown'
 
     const htmlElement = field.element
     const choices = []
@@ -15,11 +15,8 @@ class MultipleChoice extends Block {
         }
     }
     this.properties.choices = choices
-    this.properties.allow_multiple_selection = false
-    this.properties.randomize = false
-    this.properties.vertical_alignment = false
-    this.properties.allow_other_choice = false
+    this.properties.alphabetical_order = false
   }
 }
 
-export default MultipleChoice
+export default Dropdown

@@ -2,6 +2,7 @@ var path = require('path');
 
 module.exports = {
   entry: './src/app.js',
+  devtool: '#source-map',
   output: {
     filename: 'voila.js',
     publicPath: '/assets/',

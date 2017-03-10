@@ -1,67 +1,38 @@
+import Tree from './tree'
+import BlockTypeDetector from './blocks/blockTypeDetector'
+
+import ShortText from './blocks/short-text'
+
 var formSchema = {
     title: 'DemoForm',
     fields: []
 }
-var fields = []
-var types = {
-    'INPUT': {
-        'text': 'short_text',
-        'email': 'email',
-        'date': 'date',
-        'url': 'website',
-        'tel': 'short_text',
-        'number': 'number',
-        'range': 'opinion_scale'
-    },
-    'SELECT': {
-        'select-one': 'multiple_choice'
-    },
-    'TEXTAREA': {
-        'textarea': 'long_text'
-    }
-}
 
-function _getJSON(formElements) {
-    for (var key in formElements) {
-        var item = formElements[key]
-        if (!isNaN(key) && item.type !== 'button' && item.labels && item.labels.length > 0 && item.tagName !== undefined) {
-            var element = {
-                title: item.labels[0].textContent,
-                type: types[item.tagName][item.type],
-                properties: {},
-                validations: {
-                    required: false
-                }
-            }
-            var max = parseInt(item.max)
-            var min = parseInt(item.min)
-            if (item.type === 'range') {
-                element.properties.steps = (max <= 11) ? max : 11
-                element.properties.start_at_one = min === 1
-            }
-            if (item.tagName === 'SELECT') {
-                var choices = []
-                for (var choiceKey in item.children) {
-                    var label = item.children[choiceKey].innerText
-                    if (label !== undefined) {
-                        choices.push({label: label})
-                    }
-                }
-                element.properties.choices = choices
-                if (choices.length > 8) {
-                    element.type = 'dropdown'
-                    element.properties.alphabetical_order = false
-                } else {
-                    element.properties.allow_multiple_selection = false
-                    element.properties.randomize = false
-                    element.properties.vertical_alignment = false
-                    element.properties.allow_other_choice = false
-                }
-            }
-            fields.push(element)
+function _getJSON (form) {
+    const formElements = form.elements
+    let blockTypeDetector = new BlockTypeDetector()
+
+    const tree = new Tree()
+    tree.fill(form)
+
+    const parsedObject = tree.getFieldsWithLabels()
+    const parsedFields = []
+
+    for (const pair of parsedObject) {
+        const field = pair.field
+        const label = pair.label.html
+        const htmlElement = field.element
+
+        const FieldProxy = blockTypeDetector.getFieldType(htmlElement)
+        if (FieldProxy) {
+            const fieldElement = new FieldProxy(field, label)
+            parsedFields.push(fieldElement)
+        } else {
+            console.log('Has not been transfered', htmlElement)
         }
     }
-    formSchema.fields = fields
+    
+    formSchema.fields = parsedFields
     return formSchema
 }
 
@@ -74,7 +45,7 @@ function execTypeform () {
 
     for (const tfMorph of tfMorphs) {
         tfMorph.style.visibility = 'hidden'
-        const json = _getJSON(tfMorph.elements)
+        const json = _getJSON(tfMorph)
         var customHeaders = new Headers({
             'X-Typeform-Key': tfMorph.getAttribute('data-typeform'),
             'Content-Type' : 'text/plain'
