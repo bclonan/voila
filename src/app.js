@@ -1,5 +1,7 @@
 import Tree from './tree'
 
+import ShortText from './blocks/short-text'
+
 var formSchema = {
     title: 'DemoForm',
     fields: []
@@ -22,6 +24,10 @@ var types = {
     }
 }
 
+function getField (field) {
+    return ShortText
+} 
+
 function _getJSON(form) {
     const formElements = form.elements
 
@@ -29,17 +35,19 @@ function _getJSON(form) {
     tree.fill(form)
 
     const parsedObject = tree.getFieldsWithLabels()
-    const fields = []
+    const parsedFields = []
 
-    for (const pair in parsedObject) {
+    for (const pair of parsedObject) {
         const field = pair.field
         const label = pair.label.html
 
         const FieldProxy = getField(field)
-        const fieldElement = new FieldProxy(field, label)
-        fields.push(fieldElement)
+        if (FieldProxy) {
+            const fieldElement = new FieldProxy(field, label)
+            parsedFields.push(fieldElement)
+        }
     }
-    console.log('Result parsed object:', parsedObject)
+    console.log('Result parsed object:', parsedFields)
 
     for (var key in formElements) {
         var item = formElements[key]
