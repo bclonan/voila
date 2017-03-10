@@ -1,4 +1,5 @@
 import Tree from './tree'
+import BlockTypeDetector from './blocks/blockTypeDetector'
 
 import ShortText from './blocks/short-text'
 
@@ -6,30 +7,10 @@ var formSchema = {
     title: 'DemoForm',
     fields: []
 }
-var types = {
-    'INPUT': {
-        'text': 'short_text',
-        'email': 'email',
-        'date': 'date',
-        'url': 'website',
-        'tel': 'short_text',
-        'number': 'number',
-        'range': 'opinion_scale'
-    },
-    'SELECT': {
-        'select-one': 'multiple_choice'
-    },
-    'TEXTAREA': {
-        'textarea': 'long_text'
-    }
-}
 
-function getField (field) {
-    return ShortText
-} 
-
-function _getJSON(form) {
+function _getJSON (form) {
     const formElements = form.elements
+    let blockTypeDetector = new BlockTypeDetector()
 
     const tree = new Tree()
     tree.fill(form)
@@ -41,11 +22,9 @@ function _getJSON(form) {
         const field = pair.field
         const label = pair.label.html
 
-        const FieldProxy = getField(field)
-        if (FieldProxy) {
-            const fieldElement = new FieldProxy(field, label)
-            parsedFields.push(fieldElement)
-        }
+        const FieldProxy = blockTypeDetector.getFieldType(field)
+        const fieldElement = new FieldProxy(field, label)
+        fields.push(fieldElement)
     }
     console.log('Result parsed object:', parsedFields)
 
