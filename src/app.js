@@ -21,53 +21,19 @@ function _getJSON (form) {
     for (const pair of parsedObject) {
         const field = pair.field
         const label = pair.label.html
+        const htmlElement = field.element
 
-        const FieldProxy = blockTypeDetector.getFieldType(field)
-        const fieldElement = new FieldProxy(field, label)
-        fields.push(fieldElement)
+        const FieldProxy = blockTypeDetector.getFieldType(htmlElement)
+        if (FieldProxy) {
+            const fieldElement = new FieldProxy(field, label)
+            parsedFields.push(fieldElement)
+        } else {
+            console.log('Has not been transfered', htmlElement)
+        }
     }
     console.log('Result parsed object:', parsedFields)
 
-    for (var key in formElements) {
-        var item = formElements[key]
-        if (!isNaN(key) && item.type !== 'button' && item.labels && item.labels.length > 0 && item.tagName !== undefined) {
-            var element = {
-                title: item.labels[0].textContent,
-                type: types[item.tagName][item.type],
-                properties: {},
-                validations: {
-                    required: false
-                }
-            }
-            var max = parseInt(item.max)
-            var min = parseInt(item.min)
-            if (item.type === 'range') {
-                element.properties.steps = (max <= 11) ? max : 11
-                element.properties.start_at_one = min === 1
-            }
-            if (item.tagName === 'SELECT') {
-                var choices = []
-                for (var choiceKey in item.children) {
-                    var label = item.children[choiceKey].innerText
-                    if (label !== undefined) {
-                        choices.push({label: label})
-                    }
-                }
-                element.properties.choices = choices
-                if (choices.length > 8) {
-                    element.type = 'dropdown'
-                    element.properties.alphabetical_order = false
-                } else {
-                    element.properties.allow_multiple_selection = false
-                    element.properties.randomize = false
-                    element.properties.vertical_alignment = false
-                    element.properties.allow_other_choice = false
-                }
-            }
-            fields.push(element)
-        }
-    }
-    formSchema.fields = fields
+    formSchema.fields = parsedFields
     return formSchema
 }
 

@@ -1,6 +1,7 @@
 import ShortText from './short-text'
 import Email from './email'
 import Date from './date'
+import Dropdown from './dropdown'
 import Website from './website'
 import Number from './number'
 import OpinionScale from './opinion-scale'
@@ -36,40 +37,35 @@ const types = {
 
 class BlockTypeDetector {
   getFieldType (block) {
-    if (item.type === 'button' || item.tagName === undefined)
+    if (block.type === 'button' || block.tagName === undefined)
       return null
 
     let blockType = types[block.tagName][block.type]
-    let blockClassType
-
+    
     switch (blockType) {
       case SHORT_TEXT_KEY:
-        blockClassType = ShortText
-        break
+        return ShortText
       case EMAIL_KEY:
-        blockClassType = Email
-        break
+        return Email
       case DATE_KEY:
-        blockClassType = Date
-        break
+        return Date
       case WEBSITE_KEY:
-        blockClassType = Website
-        break
+        return Website
       case NUMBER_KEY:
-        blockClassType = Number
-        break
+        return Number
       case OPINION_SCALE_KEY:
-        blockClassType = OpinionScale
-        break
+        return OpinionScale
       case MULTIPLE_CHOICES_KEY:
-        blockClassType = MultipleChoice
-        break
+        if (block.children && block.children.length > 8) {
+          return Dropdown
+        } else {
+          return MultipleChoice
+        }
       case LONG_TEXT_KEY:
-        blockClassType = LongText
-        break
+        return LongText
+      default:
+        return null
     }
-
-    return blockClassType
   }
 }
 

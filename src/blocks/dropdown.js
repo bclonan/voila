@@ -19,4 +19,4 @@ class Dropdown extends Block {
   }
 }
 
-export default MultipleChoice
+export default Dropdown
