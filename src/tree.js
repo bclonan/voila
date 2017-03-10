@@ -129,7 +129,7 @@ class Tree {
     let parent = current.parent
     let currentCheckBranch = current
 
-    while (parent !== this.root && parent !== null) {
+    while (current !== this.root && parent !== null) {
       const level = parent.children
       const stack = []
 

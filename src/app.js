@@ -1,8 +1,11 @@
+import Tree from './tree'
+
+import ShortText from './blocks/short-text'
+
 var formSchema = {
     title: 'DemoForm',
     fields: []
 }
-var fields = []
 var types = {
     'INPUT': {
         'text': 'short_text',
@@ -21,7 +24,32 @@ var types = {
     }
 }
 
-function _getJSON(formElements) {
+function _getJSON(form) {
+    const formElements = form.elements
+
+    const tree = new Tree()
+    tree.fill(form)
+
+    const parsedObject = tree.getFieldsWithLabels()
+    const fields = []
+
+    for (const pair in parsedObject) {
+        const field = pair.field
+        const label = pair.label.html
+
+        const fieldType = getFieldType(field)
+        switch (fieldType) {
+            case 'SHORT_TEXT':
+                const shortText = new ShortText(field, label)
+                fields.push(shortText)
+                break;
+
+            default:
+                break;
+        }        
+    }
+    console.log('Result parsed object:', parsedObject)
+
     for (var key in formElements) {
         var item = formElements[key]
         if (!isNaN(key) && item.type !== 'button' && item.labels && item.labels.length > 0 && item.tagName !== undefined) {
@@ -74,7 +102,7 @@ function execTypeform () {
 
     for (const tfMorph of tfMorphs) {
         tfMorph.style.visibility = 'hidden'
-        const json = _getJSON(tfMorph.elements)
+        const json = _getJSON(tfMorph)
         var customHeaders = new Headers({
             'X-Typeform-Key': tfMorph.getAttribute('data-typeform'),
             'Content-Type' : 'text/plain'
