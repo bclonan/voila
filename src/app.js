@@ -1,7 +1,5 @@
 import Tree from './tree'
 
-import ShortText from './blocks/short-text'
-
 var formSchema = {
     title: 'DemoForm',
     fields: []
@@ -37,16 +35,9 @@ function _getJSON(form) {
         const field = pair.field
         const label = pair.label.html
 
-        const fieldType = getFieldType(field)
-        switch (fieldType) {
-            case 'SHORT_TEXT':
-                const shortText = new ShortText(field, label)
-                fields.push(shortText)
-                break;
-
-            default:
-                break;
-        }        
+        const fieldParser = getField(field)
+        const fieldElement = new fieldParser(field, label)
+        fields.push(fieldElement)
     }
     console.log('Result parsed object:', parsedObject)
 
