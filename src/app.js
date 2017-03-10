@@ -35,8 +35,8 @@ function _getJSON(form) {
         const field = pair.field
         const label = pair.label.html
 
-        const fieldParser = getField(field)
-        const fieldElement = new fieldParser(field, label)
+        const FieldProxy = getField(field)
+        const fieldElement = new FieldProxy(field, label)
         fields.push(fieldElement)
     }
     console.log('Result parsed object:', parsedObject)
