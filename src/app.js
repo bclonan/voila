@@ -31,8 +31,7 @@ function _getJSON (form) {
             console.log('Has not been transfered', htmlElement)
         }
     }
-    console.log('Result parsed object:', parsedFields)
-
+    
     formSchema.fields = parsedFields
     return formSchema
 }
