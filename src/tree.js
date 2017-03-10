@@ -92,18 +92,16 @@ class Tree {
       const mostRepeatedLevelHash = getMostRepeatedHash(level)
       const orphanLevelHashes = getOtherOrphanPatterns(level, mostRepeatedLevelHash)
 
-      console.log('Level length:', level.length, 'Orphan length:', orphanLevelHashes.length)
-      const orphanLevelPatterns = this.getSequencePattern(orphanLevelHashes)
+      const levelPatterns = this.getSequencePattern(orphanLevelHashes)
 
       Array.prototype.push.apply(patterns, mostRepeatedLevelHash)
-      Array.prototype.push.apply(patterns, orphanLevelPatterns)
+      Array.prototype.push.apply(patterns, levelPatterns)
     })
 
     return patterns
   }
 
   getSequencePattern (level) {
-    console.log('Level:', level.map(x => x.tagCode))
     return this.findLongestHashSet(level, Branch.hashArray)
   }
 
@@ -131,8 +129,6 @@ class Tree {
     let parent = current.parent
     let currentCheckBranch = current
 
-    //console.log('Check element:', currentCheckBranch.tagCode)
-
     while (parent !== this.root && parent !== null) {
       const level = parent.children
       const stack = []
@@ -144,7 +140,6 @@ class Tree {
           break;
         }
 
-        //console.log('Loop:', currentLevelElement.tagCode)
         Branch.forEach(x => {
           if (condition(x)) {
             stack.push(x)
@@ -176,7 +171,6 @@ class Tree {
       const labels = this.findBefore(x => x.isLabel() && x.html.trim() !== '', f)
       const field = f
 
-      //console.log('Labels found:', labels)
       const label = labels[0]
 
       result.push({field, label})

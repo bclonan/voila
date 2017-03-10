@@ -8,7 +8,7 @@ const getHtml = (str) => {
   return d.firstChild
 }
 
-test('Newspaper El País contact form', t => {
+test.skip('Newspaper El País contact form', t => {
   const html = getHtml(elPais)
 
   const tree = new Tree()
@@ -23,7 +23,7 @@ test('Newspaper El País contact form', t => {
   }))
 })
 
-test('Newspaper El Mundo contact form', t => {
+test.skip('Newspaper El Mundo contact form', t => {
   const html = getHtml(elMundo)
 
   const tree = new Tree()
@@ -38,7 +38,7 @@ test('Newspaper El Mundo contact form', t => {
   }))
 })
 
-test('Restaurant contact form', t => {
+test.skip('Restaurant contact form', t => {
   const html = getHtml(restaurant)
 
   const tree = new Tree()
@@ -53,7 +53,7 @@ test('Restaurant contact form', t => {
   }))
 })
 
-test('Bank Triodos contact form', t => {
+test.skip('Bank Triodos contact form', t => {
   const html = getHtml(bank)
 
   const tree = new Tree()
@@ -68,7 +68,7 @@ test('Bank Triodos contact form', t => {
   }))
 })
 
-test('Mail service Correos contact form (table)', t => {
+test.skip('Mail service Correos contact form (table)', t => {
   const html = getHtml(mailService)
 
   const tree = new Tree()
@@ -83,7 +83,7 @@ test('Mail service Correos contact form (table)', t => {
   }))
 })
 
-test.only('Airline service Ryanair contact form (dt)', t => {
+test.skip('Airline service Ryanair contact form (dt)', t => {
   const html = getHtml(airline)
 
   const tree = new Tree()

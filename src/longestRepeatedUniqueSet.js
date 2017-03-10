@@ -129,10 +129,8 @@ class LongestRepeatedUniqueSet {
   get (getHashForArray, getKey) {
     const hashArray = this.hashAllCombinations(this.arr, getHashForArray, getKey)
     const countByHash = this.countBy(hashArray, x => x.hash, x => x.set)
-    console.log(countByHash)
 
     const pattern = this.findMostOccuring(countByHash)
-    console.log('Pattern:', pattern)
     
     // pattern: 
     // {
