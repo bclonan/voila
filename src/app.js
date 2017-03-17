@@ -42,8 +42,18 @@ class App {
         (function(){var qs,js,q,s,d=document,gi=d.getElementById,ce=d.createElement,gt=d.getElementsByTagName,id="typeform" + Math.random().toString(36).substring(7),b="https://s3-eu-west-1.amazonaws.com/share.typeform.com/";if(!gi.call(d,id)){js=ce.call(d,"script");js.id=id;js.src=b+"widget.js";q=gt.call(d,"script")[0];q.parentNode.insertBefore(js,q)}})()
     }
 
-    _addSignupBadge () {
+    _addSignupBadge (form) {
         console.log('Not authorized')
+        const callToActionDiv = document.createElement('div')
+        callToActionDiv.style.position = 'absolute'
+        callToActionDiv.style.left = '10px'
+        callToActionDiv.style.bottom = '20%'
+
+        const description = document.createElement('p')
+        description.innerText = 'If you need help - ask awesomely'
+        callToActionDiv.appendChild(description)
+
+        form.appendChild(callToActionDiv)
     }
 
     voila () {
@@ -70,7 +80,7 @@ class App {
                     tfMorph.innerHTML = text
 
                     if (!isAuthorized) {
-                        this._addSignupBadge()
+                        this._addSignupBadge(tfMorph)
                     }
                     this._execTypeform()
                 })

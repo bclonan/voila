@@ -1,5 +1,5 @@
-class Constants {
-    constructor () {
-        this.DEFAULT_APIKEY = 'AskAwesomely'
-    }
+const Constants = {
+    DEFAULT_APIKEY: '[AskAwesomely]'
 }
+
+export default Constants

@@ -18,7 +18,7 @@ class Converter():
     def prepareEmbed(self, formUid, formName):
         embedUrl = 'https://voila.typeform.com/to/' + formUid
         formName = formName
-        formStyle =  'width:100%;height:500px;'
+        formStyle =  'width:100%;min-height:500px;'
         embedCode = ('<!-- Change the width and height values to suit you best -->'
         '<div class="typeform-widget" data-url="__embed_url__" data-text="__form_name__" style="__style__"></div>'
         '<div style="font-family: Sans-Serif;font-size: 12px;color: #999;opacity: 0.5; padding-top: 5px;">Powered by<a href="https://www.typeform.com/examples/forms/?utm_campaign=__form_uid__&amp;utm_source=typeform.com-5872961-Basic&amp;utm_medium=typeform&amp;utm_content=typeform-embedded-onlineform&amp;utm_term=EN" style="color: #999" target="_blank">Typeform</a></div>')
