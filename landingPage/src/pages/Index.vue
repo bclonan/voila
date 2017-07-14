@@ -124,7 +124,7 @@
         </div>
 
 
-        <div class="examples">
+        <div class="screen-box examples">
             <div class="examples__element"></div>
 
             <div class="examples__content">
@@ -427,28 +427,7 @@ export default {
     box-shadow: 0 0 0 1px #F62440;
 }
 
-.footer-links {
-    height: 30vh;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-
-    font-size: 20px;
-    color: #303030;
-}
-
-.footer-links__voila {
-    font-family: 'AvenirNext-DemiBold';
-}
-
-.footer-links__link {
-    color: #303030;
-}
-
 .examples {
-    height: 960px;
     display: flex;
     flex-direction: row;
 }
@@ -482,6 +461,26 @@ export default {
     font-weight: 300;
     color: #8D9AAD;
     line-height: 26px;
+}
+
+.footer-links {
+    height: 30vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    font-size: 20px;
+    color: #303030;
+}
+
+.footer-links__voila {
+    font-family: 'AvenirNext-DemiBold';
+}
+
+.footer-links__link {
+    color: #303030;
 }
 
 </style>
