@@ -106,10 +106,12 @@
                         1. Sign in to your Typeform account
                     </div>
 
-                    <div class="steps-detailed__step__content">
-                        <a class="steps-detailed__step__content__login-link header__menu__link--cta" href="#">Log in to Typeform</a>
-                        <a class="steps-detailed__step__content__donthaveaccount-link" href="#">Don't have account</a>
-                        <a class="steps-detailed__step__content__getstarted-link" href="#">Get started</a>
+                    <div class="steps-detailed__step__content__container">
+                        <div class="steps-detailed__step__content">
+                            <a class="steps-detailed__step__content__login-link header__menu__link--cta" href="#">Log in to Typeform</a>
+                            <a class="steps-detailed__step__content__donthaveaccount-link" href="#">Don't have account</a>
+                            <a class="steps-detailed__step__content__getstarted-link" href="#">Get started</a>
+                        </div>
                     </div>
                 </div>
 
@@ -125,23 +127,32 @@
 
 
         <div class="screen-box examples">
-            <div class="examples__element"></div>
-
-            <div class="examples__content">
-                <div class="examples__content__title">
-                    Examples
-                </div>
-                <div class="examples__content__header">
-                    Ham hock bacon
-                </div>
-                <div class="examples__content__description">
-                    Spicy jalapeno sausage prosciutto ball tip turkey
-                    chicken alcatra landjaeger. Spicy jalapeno sausage
-                    prosciutto ball tip turkey chicken alcatra landjaeger.
+            <div class="examples__container">
+                <div class="examples__webview webview">
+                    <div class="webview__header"></div>
+                    <div class="webview__content"></div>
                 </div>
 
-
+                <div class="examples__content">
+                    <div class="examples__content__title">
+                        Examples
+                    </div>
+                    <div class="examples__content__header">
+                        Ham hock bacon
+                    </div>
+                    <div class="examples__content__description">
+                        Spicy jalapeno sausage prosciutto ball tip turkey
+                        chicken alcatra landjaeger. Spicy jalapeno sausage
+                        prosciutto ball tip turkey chicken alcatra landjaeger.
+                    </div>
+                    <div class="examples__content__arrows">
+                        <a class="examples__content__arrows__arrow examples__content__arrows__arrow--left"></a>
+                        <a class="examples__content__arrows__arrow examples__content__arrows__arrow--right"></a>
+                    </div>
+                </div>
             </div>
+
+            <div class="examples__background-line"></div>
         </div>
 
 
@@ -262,6 +273,7 @@ export default {
     padding: 0 5%;
     display: flex;
     align-items: center;
+    min-height: 700px;
 }
 
 .for-steps__container {
@@ -287,6 +299,7 @@ export default {
 .for-steps__steps {
     display: flex;
     justify-content: space-between;
+    flex-wrap: nowrap;
 }
 
 .card {
@@ -314,6 +327,21 @@ export default {
     font-size: 16px;
 }
 
+@media screen and (max-width: 1024px) {
+    .for-steps {
+        min-height: 1300px;
+    }
+    
+    .for-steps__steps {
+        flex-wrap: wrap;
+    }
+
+    .card {
+        width: 360px;
+        margin-top: 50px;
+    }
+}
+
 .playful-photo {
     display: flex;
     justify-content: center;
@@ -339,9 +367,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-content: center;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-
+    
     height: 100%;
 }
 
@@ -355,10 +381,15 @@ export default {
     font-family: 'AvenirNext-DemiBold';
 }
 
-.steps-detailed__step__content {
-    flex: 0.5 1 50%;
-    align-self: center;
+.steps-detailed__step__content__container {
+    flex: 1;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.steps-detailed__step__content {
     width: 277px;
     height: 163px;
 
@@ -428,20 +459,52 @@ export default {
 }
 
 .examples {
+    min-height: 700px;
+}
+
+.examples__container {
+    height: 70%;
+
     display: flex;
     flex-direction: row;
 }
 
-.examples__element {
+.examples__webview {
+    position: relative;
+    top: 20%;
+
     width: 60%;
-    height: 635px;
-    background: grey;
+    
+    margin-left: -10px;
+    background: #ECECEC;
+
+    border-radius: 0 3px 3px 0;
+    border: 1px solid #ECECEC;
+}
+
+.webview {
+
+}
+
+.webview__header {
+    height: 34px;
+    width: 100%;
+    background: #D5DBE2;
+    border-radius: 0 3px 0 0;
+}
+
+.webview__content {
+    width: 100%;
+    height: calc(100% - 34px);
+    background: #E8EBEF;
 }
 
 .examples__content {
-    flex-direction: column;
+    position: relative;
+    top: calc(20% + 100px);
+
     width: 40%;
-    padding: 50px 50px;
+    padding-left: 50px;
 }
 
 .examples__content__title {
@@ -461,6 +524,31 @@ export default {
     font-weight: 300;
     color: #8D9AAD;
     line-height: 26px;
+}
+
+.examples__content__arrows {
+    margin-top: 25px;
+}
+
+.examples__content__arrows__arrow {
+    display: inline-block;
+    
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+
+    background: #C6CCD6;
+    color: #FFFFFF;
+}
+
+.examples__content__arrows__arrow--left:after {
+    
+}
+
+.examples__background-line {
+    width: 100%;
+    height: 30%;
+    background: #303030;
 }
 
 .footer-links {
