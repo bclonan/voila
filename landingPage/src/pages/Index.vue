@@ -123,6 +123,25 @@
                 </div>
             </div>
         </div>
+
+        <div class="examples">
+            <div class="examples__element"></div>
+
+            <div class="examples__content">
+                <div class="examples__content--title">
+                    Examples
+                </div>
+                <div class="">
+                    Ham hock bacon
+                </div>
+                <div class="">
+                    Spicy jalapeno sausage prosciutto ball tip turkey
+                    chicken alcatra landjaeger. Spicy jalapeno sausage
+                    prosciutto ball tip turkey chicken alcatra landjaeger.
+                </div>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -318,4 +337,23 @@ export default {
 .steps-detailed__step__content {
     
 }
+
+.examples {
+    height: 960px;
+    display: flex;
+    flex-direction: row;
+}
+
+.examples__element {
+    width: 60%;
+    height: 635px;
+    background: grey;
+}
+
+.examples__content {
+    flex-direction: column;
+    width: 380px;
+    padding: 50px 50px;
+}
+
 </style>
