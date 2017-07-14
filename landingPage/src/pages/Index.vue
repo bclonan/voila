@@ -1,125 +1,125 @@
 <template>
-  <div class="container">
-    <header class="header">
-        <div class="header__logo">
-            Voilà
-            <div class="header__logo_sub-title">Makes you go “Ooh la la”</div>
+    <div class="container">
+        <header class="header">
+            <div class="header__logo">
+                Voilà
+                <div class="header__logo_sub-title">Makes you go “Ooh la la”</div>
+            </div>
+
+            <div class="header__menu">
+                <a class="header__menu__link" href="#">How?</a>
+                <a class="header__menu__link" href="#">Examples</a>
+                <a class="header__menu__link--cta" href="#">Let's do it!</a>
+            </div>
+        </header>
+
+
+
+        <div class="presentation">
+            <div class="presentation__text">
+                <h1 class="presentation__text__title">Convert online forms into sexy typeforms</h1>
+                <div class="presentation__text__sub-title">People will beg to <strike>feel</strike> <i>fill</i> them out</div>
+            </div>
+
+            <div class="presentation__video">
+                Video
+            </div>
         </div>
 
-        <div class="header__menu">
-            <a class="header__menu__link" href="#">How?</a>
-            <a class="header__menu__link" href="#">Examples</a>
-            <a class="header__menu__link--cta" href="#">Let's do it!</a>
+
+
+        <div class="for-steps">
+            <div class="for-steps__header">
+                <div class="for-steps__header__sub-title">Lorem ipsum dolor sit amet, consectetur</div>
+                <h2 class="for-steps__header__title">Four steps to conversational heaven</h2>
+            </div>
+
+            <div class="for-steps__steps">
+                <div class="for-steps__steps__step card">
+                    <div class="card__image">
+                    </div>
+
+                    <div class="card__title">
+                        Add HTML script
+                    </div>
+
+                    <div class="card__text">
+                        You know how to stick it in there, don’t you? Don’t worry if you don’t—it’s not hard.
+                    </div>
+                </div>
+
+                <div class="for-steps__steps__step card">
+                    <div class="card__image">
+                    </div>
+
+                    <div class="card__title">
+                        Add a unique identifyer code
+                    </div>
+
+                    <div class="card__text">
+                        You know me, but I don’t know you. Make sure you add your identifier code so we know where to send your data?
+                    </div>
+                </div>
+
+                <div class="for-steps__steps__step card">
+                    <div class="card__image">
+                    </div>
+
+                    <div class="card__title">
+                        Complete setup on your website
+                    </div>
+
+                    <div class="card__text">
+                        Do I have to get into all the details? You get to play with code on your webiste. I’m feeling kinda kinky, baby!
+                    </div>
+                </div>
+
+                <div class="for-steps__steps__step card">
+                    <div class="card__image">
+                    </div>
+
+                    <div class="card__title">
+                        Push the button!
+                    </div>
+
+                    <div class="card__text">
+                        Or caress it. We don’t care. Take people to conversational data collection heaven. You know you want to.
+                    </div>
+                </div>
+            </div>
         </div>
-    </header>
 
 
 
-    <div class="presentation">
-        <div class="presentation__text">
-            <h1 class="presentation__text__title">Convert online forms into sexy typeforms</h1>
-            <div class="presentation__text__sub-title">People will beg to <strike>feel</strike> <i>fill</i> them out</div>
+        <div class="playful-photo">
+            photo + playful text
         </div>
 
-        <div class="presentation__video">
-            Video
+
+
+        <div class="steps-detailed">
+            <div class="steps-detailed__step">
+                <div class="steps-detailed__step__title">
+                    1. Sign in to your Typeform account
+                </div>
+
+                <div class="steps-detailed__step__content">
+                    <a class="header__menu__link--cta" href="#">Log in to Typeform</a>
+
+                    <a href="#">Don't have account</a>
+                    <a href="#">Get started</a>
+                </div>
+
+                <div class="steps-detailed__step__bullets nav-bullets">
+                    <div class="nav-bullets__bullet"></div>
+                    <div class="nav-bullets__bullet"></div>
+                    <div class="nav-bullets__bullet"></div>
+                    <div class="nav-bullets__bullet"></div>
+                    <div class="nav-bullets__bullet"></div>
+                </div>
+            </div>
         </div>
     </div>
-
-
-
-    <div class="for-steps">
-        <div class="for-steps__header">
-            <div class="for-steps__header__sub-title">Lorem ipsum dolor sit amet, consectetur</div>
-            <h2 class="for-steps__header__title">Four steps to conversational heaven</h2>
-        </div>
-
-        <div class="for-steps__steps">
-            <div class="for-steps__steps__step card">
-                <div class="card__image">
-                </div>
-
-                <div class="card__title">
-                    Add HTML script
-                </div>
-
-                <div class="card__text">
-                    You know how to stick it in there, don’t you? Don’t worry if you don’t—it’s not hard.
-                </div>
-            </div>
-
-            <div class="for-steps__steps__step card">
-                <div class="card__image">
-                </div>
-
-                <div class="card__title">
-                    Add a unique identifyer code
-                </div>
-
-                <div class="card__text">
-                    You know me, but I don’t know you. Make sure you add your identifier code so we know where to send your data?
-                </div>
-            </div>
-
-            <div class="for-steps__steps__step card">
-                <div class="card__image">
-                </div>
-
-                <div class="card__title">
-                    Complete setup on your website
-                </div>
-
-                <div class="card__text">
-                    Do I have to get into all the details? You get to play with code on your webiste. I’m feeling kinda kinky, baby!
-                </div>
-            </div>
-
-            <div class="for-steps__steps__step card">
-                <div class="card__image">
-                </div>
-
-                <div class="card__title">
-                    Push the button!
-                </div>
-
-                <div class="card__text">
-                    Or caress it. We don’t care. Take people to conversational data collection heaven. You know you want to.
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-    <div class="playful-photo">
-        photo + playful text
-    </div>
-
-
-
-    <div class="steps-detailed">
-        <div class="steps-detailed__step">
-            <div class="steps-detailed__step__title">
-                1. Sign in to your Typeform account
-            </div>
-
-            <div class="steps-detailed__step__content">
-                <a class="header__menu__link--cta" href="#">Log in to Typeform</a>
-
-                <a href="#">Don't have account</a>
-                <a href="#">Get started</a>
-            </div>
-
-            <div class="steps-detailed__step__bullets nav-bullets">
-                <div class="nav-bullets__bullet"></div>
-                <div class="nav-bullets__bullet"></div>
-                <div class="nav-bullets__bullet"></div>
-                <div class="nav-bullets__bullet"></div>
-                <div class="nav-bullets__bullet"></div>
-            </div>
-        </div>
-    </div>
-  </div>
 </template>
 
 <script>
