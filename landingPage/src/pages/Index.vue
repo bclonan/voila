@@ -15,7 +15,7 @@
 
 
 
-        <div class="presentation">
+        <div class="screen-box presentation">
             <div class="presentation__text">
                 <h1 class="presentation__text__title">Convert online forms into sexy typeforms</h1>
                 <div class="presentation__text__sub-title">People will beg to <strike>feel</strike> <i>fill</i> them out</div>
@@ -28,7 +28,7 @@
 
 
 
-        <div class="for-steps">
+        <div class="screen-box for-steps">
             <div class="for-steps__header">
                 <div class="for-steps__header__sub-title">Lorem ipsum dolor sit amet, consectetur</div>
                 <h2 class="for-steps__header__title">Four steps to conversational heaven</h2>
@@ -91,13 +91,13 @@
 
 
 
-        <div class="playful-photo">
+        <div class="screen-box playful-photo">
             photo + playful text
         </div>
 
 
 
-        <div class="steps-detailed">
+        <div class="screen-box steps-detailed">
             <div class="steps-detailed__step">
                 <div class="steps-detailed__step__title">
                     1. Sign in to your Typeform account
@@ -181,13 +181,16 @@ export default {
     padding: 15px 52px;
 }
 
+.screen-box {
+    height: 100vh;
+}
+
 .presentation {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     background-color: #303030;
-    height: 700px;
     padding: 0 70px;
     margin-bottom: 10px;
 }
@@ -268,8 +271,7 @@ export default {
     align-items: center;
 
     background-color: #F62440;
-    height: 700px;
-
+    
     font-weight: 600;
     color: #FFFFFF;
 }
