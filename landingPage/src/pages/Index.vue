@@ -29,61 +29,63 @@
 
 
         <div class="screen-box for-steps">
-            <div class="for-steps__header">
-                <div class="for-steps__header__sub-title">Lorem ipsum dolor sit amet, consectetur</div>
-                <h2 class="for-steps__header__title">Four steps to conversational heaven</h2>
-            </div>
-
-            <div class="for-steps__steps">
-                <div class="for-steps__steps__step card">
-                    <div class="card__image">
-                    </div>
-
-                    <div class="card__title">
-                        Add HTML script
-                    </div>
-
-                    <div class="card__text">
-                        You know how to stick it in there, don’t you? Don’t worry if you don’t—it’s not hard.
-                    </div>
+            <div class="for-steps__container">
+                <div class="for-steps__header">
+                    <div class="for-steps__header__sub-title">Lorem ipsum dolor sit amet, consectetur</div>
+                    <h2 class="for-steps__header__title">Four steps to conversational heaven</h2>
                 </div>
 
-                <div class="for-steps__steps__step card">
-                    <div class="card__image">
+                <div class="for-steps__steps">
+                    <div class="for-steps__steps__step card">
+                        <div class="card__image">
+                        </div>
+
+                        <div class="card__title">
+                            Add HTML script
+                        </div>
+
+                        <div class="card__text">
+                            You know how to stick it in there, don’t you? Don’t worry if you don’t—it’s not hard.
+                        </div>
                     </div>
 
-                    <div class="card__title">
-                        Add a unique identifyer code
+                    <div class="for-steps__steps__step card">
+                        <div class="card__image">
+                        </div>
+
+                        <div class="card__title">
+                            Add a unique identifyer code
+                        </div>
+
+                        <div class="card__text">
+                            You know me, but I don’t know you. Make sure you add your identifier code so we know where to send your data?
+                        </div>
                     </div>
 
-                    <div class="card__text">
-                        You know me, but I don’t know you. Make sure you add your identifier code so we know where to send your data?
-                    </div>
-                </div>
+                    <div class="for-steps__steps__step card">
+                        <div class="card__image">
+                        </div>
 
-                <div class="for-steps__steps__step card">
-                    <div class="card__image">
-                    </div>
+                        <div class="card__title">
+                            Complete setup on your website
+                        </div>
 
-                    <div class="card__title">
-                        Complete setup on your website
-                    </div>
-
-                    <div class="card__text">
-                        Do I have to get into all the details? You get to play with code on your webiste. I’m feeling kinda kinky, baby!
-                    </div>
-                </div>
-
-                <div class="for-steps__steps__step card">
-                    <div class="card__image">
+                        <div class="card__text">
+                            Do I have to get into all the details? You get to play with code on your webiste. I’m feeling kinda kinky, baby!
+                        </div>
                     </div>
 
-                    <div class="card__title">
-                        Push the button!
-                    </div>
+                    <div class="for-steps__steps__step card">
+                        <div class="card__image">
+                        </div>
 
-                    <div class="card__text">
-                        Or caress it. We don’t care. Take people to conversational data collection heaven. You know you want to.
+                        <div class="card__title">
+                            Push the button!
+                        </div>
+
+                        <div class="card__text">
+                            Or caress it. We don’t care. Take people to conversational data collection heaven. You know you want to.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -98,24 +100,26 @@
 
 
         <div class="screen-box steps-detailed">
-            <div class="steps-detailed__step">
-                <div class="steps-detailed__step__title">
-                    1. Sign in to your Typeform account
-                </div>
+            <div class="steps-detailed__container">
+                <div class="steps-detailed__step">
+                    <div class="steps-detailed__step__title">
+                        1. Sign in to your Typeform account
+                    </div>
 
-                <div class="steps-detailed__step__content">
-                    <a class="header__menu__link--cta" href="#">Log in to Typeform</a>
+                    <div class="steps-detailed__step__content">
+                        <a class="header__menu__link--cta" href="#">Log in to Typeform</a>
 
-                    <a href="#">Don't have account</a>
-                    <a href="#">Get started</a>
-                </div>
+                        <a href="#">Don't have account</a>
+                        <a href="#">Get started</a>
+                    </div>
 
-                <div class="steps-detailed__step__bullets nav-bullets">
-                    <div class="nav-bullets__bullet"></div>
-                    <div class="nav-bullets__bullet"></div>
-                    <div class="nav-bullets__bullet"></div>
-                    <div class="nav-bullets__bullet"></div>
-                    <div class="nav-bullets__bullet"></div>
+                    <div class="steps-detailed__step__bullets nav-bullets">
+                        <div class="nav-bullets__bullet"></div>
+                        <div class="nav-bullets__bullet"></div>
+                        <div class="nav-bullets__bullet"></div>
+                        <div class="nav-bullets__bullet"></div>
+                        <div class="nav-bullets__bullet"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -147,7 +151,7 @@ export default {
 }
 
 .header__logo {
-    font-size: 21px;
+    font-size: 22px;
     color: #FFFFFF;
 
     background-color: #303030;
@@ -155,7 +159,7 @@ export default {
 }
 
 .header__logo_sub-title {
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .header__menu {
@@ -167,13 +171,13 @@ export default {
 }
 
 .header__menu__link {
-    font-weight: 600;
+    font-family: 'AvenirNext-DemiBold';
     color: #F62440;
-    font-size: 15px;
+    font-size: 16px;
 }
 
 .header__menu__link--cta {
-    font-weight: 600;
+    font-family: 'AvenirNext-DemiBold';
     color: #F62440;
     font-size: 15px;
 
@@ -187,26 +191,25 @@ export default {
 
 .presentation {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 
     background-color: #303030;
-    padding: 0 70px;
-    margin-bottom: 10px;
+    padding: 0 5%;
 }
 
 .presentation__text {
     color: #FFFFFF;
-    width: 430px;
+    width: 505px;
 }
 
 .presentation__text__title {
-    font-weight: 600;
-    font-size: 40px;
+    font-family: 'AvenirNext-DemiBold';
+    font-size: 48px;
 }
 
 .presentation__text__sub-title {
-    font-size: 19px;
+    font-size: 22px;
 }
 
 .presentation__video {
@@ -221,7 +224,14 @@ export default {
 }
 
 .for-steps {
-    padding: 150px 138px;
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+}
+
+.for-steps__container {
+    height: 80%;
+    width: 100%;
 }
 
 .for-steps__header {
@@ -229,13 +239,13 @@ export default {
 }
 
 .for-steps__header__sub-title {
-    font-size: 19px;
+    font-size: 22px;
 }
 
 .for-steps__header__title {
-    font-size: 40px;
+    font-family: 'AvenirNext-DemiBold';
+    font-size: 48px;
     color: #F62440;
-    font-weight: 600;
     margin: 5px 0;
 }
 
@@ -258,11 +268,15 @@ export default {
 }
 
 .card__title {
+    font-size: 18px;
     color: #3C4858;
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    font-weight: 800;
+    font-family: 'Avenir-Heavy';
     width: 150px;
     height: 70px;
+}
+
+.card__text {
+    font-size: 16px;
 }
 
 .playful-photo {
@@ -277,7 +291,13 @@ export default {
 }
 
 .steps-detailed {
-    padding: 150px 138px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.steps-detailed__container {
+    height: 60%;
 }
 
 .steps-detailed__step {
@@ -291,6 +311,8 @@ export default {
     font-size: 36px;
     color: #3C4858;
     text-align: center;
+
+    font-family: 'AvenirNext-DemiBold';
 }
 
 .steps-detailed__step__content {

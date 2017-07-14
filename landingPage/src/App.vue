@@ -21,7 +21,7 @@ body {
 }
 
 #app {
-  font-family: 'Avenir Next', Helvetica, Arial, sans-serif;
+  font-family: 'Avenir Next', Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #8D9AAD;
