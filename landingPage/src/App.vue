@@ -27,6 +27,11 @@ body {
   color: #8D9AAD;
 }
 
+a {
+  color: #F62440;
+  font-size: 13px;
+}
+
 a:hover, a:visited, a:link, a:active {
     text-decoration: none;
 }

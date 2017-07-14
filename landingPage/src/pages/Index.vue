@@ -107,22 +107,35 @@
                     </div>
 
                     <div class="steps-detailed__step__content">
-                        <a class="header__menu__link--cta" href="#">Log in to Typeform</a>
-
-                        <a href="#">Don't have account</a>
-                        <a href="#">Get started</a>
+                        <a class="steps-detailed__step__content__login-link header__menu__link--cta" href="#">Log in to Typeform</a>
+                        <a class="steps-detailed__step__content__donthaveaccount-link" href="#">Don't have account</a>
+                        <a class="steps-detailed__step__content__getstarted-link" href="#">Get started</a>
                     </div>
+                </div>
 
-                    <div class="steps-detailed__step__bullets nav-bullets">
-                        <div class="nav-bullets__bullet"></div>
-                        <div class="nav-bullets__bullet"></div>
-                        <div class="nav-bullets__bullet"></div>
-                        <div class="nav-bullets__bullet"></div>
-                        <div class="nav-bullets__bullet"></div>
-                    </div>
+                <div class="steps-detailed__bullets nav-bullets">
+                    <a class="nav-bullets__bullet nav-bullets__bullet--active" href="#"></a>
+                    <a class="nav-bullets__bullet" href="#"></a>
+                    <a class="nav-bullets__bullet" href="#"></a>
+                    <a class="nav-bullets__bullet" href="#"></a>
+                    <a class="nav-bullets__bullet" href="#"></a>
                 </div>
             </div>
         </div>
+
+        <footer>
+            <div class="footer-links">
+                <div>
+                    <span class="footer-links__voila">Voilà.</span>
+                    <span>Makes you go ‘Ooh la la’</span>
+                </div>
+                <div>
+                    <a class="footer-links__link" href="#">About Typeform</a>
+                    ·
+                    <a class="footer-links__link" href="#">Contact</a>
+                </div>
+            </div>
+        </footer>
     </div>
 </template>
 
@@ -179,7 +192,7 @@ export default {
 .header__menu__link--cta {
     font-family: 'AvenirNext-DemiBold';
     color: #F62440;
-    font-size: 15px;
+    font-size: 16px;
 
     border: 3px solid #F62440;
     padding: 15px 52px;
@@ -304,10 +317,15 @@ export default {
     display: flex;
     flex-direction: column;
     align-content: center;
+    justify-content: space-between;
     flex-wrap: nowrap;
+
+    height: 100%;
 }
 
 .steps-detailed__step__title {
+    flex-grow: 0;
+
     font-size: 36px;
     color: #3C4858;
     text-align: center;
@@ -316,6 +334,94 @@ export default {
 }
 
 .steps-detailed__step__content {
-    
+    flex: 0.5 1 50%;
+    align-self: center;
+
+    width: 277px;
+    height: 163px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.steps-detailed__step__content__login-link {
+    width: 100%;
+    display: block;
+    text-align: center;
+
+    margin-bottom: 47px;
+}
+
+.steps-detailed__step__content__donthaveaccount-link {
+    opacity: 0.6;
+    margin-bottom: 13px;
+}
+
+.steps-detailed__step__content__getstarted-link {
+    width: 163px;
+    display: block;
+
+    font-family: 'AvenirNext-DemiBold';
+    color: #FFFFFF;
+    text-align: center;
+
+    background: #F62440;
+    opacity: 0.6;
+
+    padding: 7px 47px 5px;
+}
+
+.steps-detailed__bullets {
+    margin: 0 auto;
+    width: 277px;
+}
+
+.nav-bullets {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-bullets__bullet {
+    display: block;
+
+    height: 17px;
+    width: 17px;
+    border-radius: 50%;
+    border: 2px solid #FFFFFF;
+    background: #C6CCD6;
+
+    box-shadow: 0 0 0 1px #C6CCD6;
+}
+
+.nav-bullets__bullet:hover {
+    background: #A4A9B2;
+    box-shadow: 0 0 0 1px #A4A9B2;
+}
+
+.nav-bullets__bullet--active, .nav-bullets__bullet--active:hover {
+    background: #F62440;
+
+    box-shadow: 0 0 0 1px #F62440;
+}
+
+.footer-links {
+    height: 30vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    font-size: 20px;
+    color: #303030;
+}
+
+.footer-links__voila {
+    font-family: 'AvenirNext-DemiBold';
+}
+
+.footer-links__link {
+    color: #303030;
 }
 </style>
