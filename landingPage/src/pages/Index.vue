@@ -128,17 +128,19 @@
             <div class="examples__element"></div>
 
             <div class="examples__content">
-                <div class="examples__content--title">
+                <div class="examples__content__title">
                     Examples
                 </div>
-                <div class="">
+                <div class="examples__content__header">
                     Ham hock bacon
                 </div>
-                <div class="">
+                <div class="examples__content__description">
                     Spicy jalapeno sausage prosciutto ball tip turkey
                     chicken alcatra landjaeger. Spicy jalapeno sausage
                     prosciutto ball tip turkey chicken alcatra landjaeger.
                 </div>
+
+
             </div>
         </div>
 
@@ -352,8 +354,27 @@ export default {
 
 .examples__content {
     flex-direction: column;
-    width: 380px;
+    width: 40%;
     padding: 50px 50px;
+}
+
+.examples__content__title {
+    font-size: 20px;
+    font-weight: 300;
+    color: #3C4858;
+}
+
+.examples__content__header {
+    font-size: 42px;
+    font-weight: 500;
+    color: #F62440;
+}
+
+.examples__content__description {
+    font-size: 16px;
+    font-weight: 300;
+    color: #8D9AAD;
+    line-height: 26px;
 }
 
 </style>
