@@ -123,6 +123,28 @@
             </div>
         </div>
 
+
+        <div class="examples">
+            <div class="examples__element"></div>
+
+            <div class="examples__content">
+                <div class="examples__content__title">
+                    Examples
+                </div>
+                <div class="examples__content__header">
+                    Ham hock bacon
+                </div>
+                <div class="examples__content__description">
+                    Spicy jalapeno sausage prosciutto ball tip turkey
+                    chicken alcatra landjaeger. Spicy jalapeno sausage
+                    prosciutto ball tip turkey chicken alcatra landjaeger.
+                </div>
+
+
+            </div>
+        </div>
+
+
         <footer>
             <div class="footer-links">
                 <div>
@@ -424,4 +446,42 @@ export default {
 .footer-links__link {
     color: #303030;
 }
+
+.examples {
+    height: 960px;
+    display: flex;
+    flex-direction: row;
+}
+
+.examples__element {
+    width: 60%;
+    height: 635px;
+    background: grey;
+}
+
+.examples__content {
+    flex-direction: column;
+    width: 40%;
+    padding: 50px 50px;
+}
+
+.examples__content__title {
+    font-size: 20px;
+    font-weight: 300;
+    color: #3C4858;
+}
+
+.examples__content__header {
+    font-size: 42px;
+    font-weight: 500;
+    color: #F62440;
+}
+
+.examples__content__description {
+    font-size: 16px;
+    font-weight: 300;
+    color: #8D9AAD;
+    line-height: 26px;
+}
+
 </style>
