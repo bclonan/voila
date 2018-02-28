@@ -4,7 +4,7 @@
   "description": "Convert HTML to Typeform on the fly.",
   "main": "app.js",
   "dependencies": {
-    "webpack": "^1.14.0"
+    "webpack": "^2.2.0"
   },
   "devDependencies": {
     "ava": "^0.17.0",
